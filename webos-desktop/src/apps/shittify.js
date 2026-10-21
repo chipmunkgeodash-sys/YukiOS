@@ -1,7 +1,24 @@
 import { resolveGhUrl, resolveIconUrl } from "../shared/assetResolver.js";
 import { audioMixer } from "../audioMixer.js";
-import { mountAstralMusic } from "./astralMusic.js";
-import { astralRequest, getMusicState, inAstral, onMusicState } from "../shared/astralBridge.js";
+import { ASTRAL_PAGE_SCRIPT } from "./shittifyAstral.js";
+import {
+  astralRequest,
+  getAstralIdentity,
+  inAstral,
+  onAstralIdentity,
+} from "../shared/astralBridge.js";
+
+// What the Evil Spotify page may ask Astral for (see shittifyAstral.js).
+const ASTRAL_PAGE_OPS = new Set([
+  "music.featured",
+  "music.shared",
+  "music.search",
+  "music.resolve",
+  "music.addShared",
+  "music.removeShared",
+  "music.play",
+  "music.stop",
+]);
 import {
   BaseApp,
   os,
@@ -274,13 +291,6 @@ export class ShittifyApp extends BaseApp {
     );
     this.setupMessageBridge(winId);
 
-    // Inside Astral OS the player is Astral's own (shared playlist, featured,
-    // your playlists); the third-party page below is for every other build.
-    if (inAstral()) {
-      this.mountNative(winId, contentDiv);
-      return;
-    }
-
     try {
       const res = await fetch(resolvedUrl);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -297,10 +307,10 @@ export class ShittifyApp extends BaseApp {
         },
       );
 
-      const injected = html.replace(
-        /<\/head>/i,
-        `${SHITTIFY_BRIDGE_SCRIPT}</head>`,
-      );
+      // Inside Astral OS the page also gets the Astral rows (featured and
+      // shared songs); everywhere else it is the original, untouched.
+      const addOns = SHITTIFY_BRIDGE_SCRIPT + (inAstral() ? ASTRAL_PAGE_SCRIPT : "");
+      const injected = html.replace(/<\/head>/i, () => `${addOns}</head>`);
       const blobUrl = URL.createObjectURL(
         new Blob([injected], { type: "text/html" }),
       );
@@ -313,6 +323,7 @@ export class ShittifyApp extends BaseApp {
         content.style.overflow = "";
         content.innerHTML = `<iframe id="shittify-iframe" src="${blobUrl}" style="width:100%;height:100%;border:none;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-pointer-lock"></iframe>`;
         this.iframe = content.querySelector("iframe");
+        this.attachAstralRelay();
         this.iframe.addEventListener("load", () => {
           try {
             const lastState = os.storage.get(StorageKeys.shittifyLastState);
@@ -338,34 +349,34 @@ export class ShittifyApp extends BaseApp {
     }
   }
 
-  mountNative(winId, contentDiv) {
-    contentDiv.style.cssText = "width:100%; height:100%; overflow:hidden; position:relative;";
-    contentDiv.innerHTML = "";
-    this.native = mountAstralMusic(contentDiv);
-    // Media keys and the volume mixer drive Astral's player.
-    audioMixer().setChannelCommandHandler(winId, (cmd, data) => {
-      const playing = !!getMusicState()?.playing;
-      if (cmd === "play" && !playing) astralRequest("music.toggle").catch(() => {});
-      else if (cmd === "pause" && playing) astralRequest("music.toggle").catch(() => {});
-      else if (cmd === "nexttrack") astralRequest("music.next").catch(() => {});
-      else if (cmd === "previoustrack") astralRequest("music.previous").catch(() => {});
-      else if (cmd === "volume") {
-        const v = data && data.value != null ? data.value : data && data.volume;
-        astralRequest("music.volume", { value: v }).catch(() => {});
+  // Passes the page's Astral requests on to Astral and its answers back, and
+  // tells the page who is signed in. Only the Evil Spotify frame is heard, and
+  // only for the actions listed above.
+  attachAstralRelay() {
+    if (!inAstral()) return;
+    const post = (msg) => {
+      const target = this.iframe && this.iframe.contentWindow;
+      if (target) target.postMessage({ __astral_page: true, ...msg }, "*");
+    };
+    this.pageRelay = async (e) => {
+      if (!this.iframe || e.source !== this.iframe.contentWindow) return;
+      const d = e.data;
+      if (!d || d.__astral_page !== true) return;
+      if (d.type === "hello") {
+        post({ type: "identity", user: getAstralIdentity() });
+        return;
       }
-    });
-    this.offMusic = onMusicState((s) => {
-      audioMixer().updateChannelMeta(winId, {
-        track: s?.track || "",
-        artist: s?.artist || "",
-        album: "",
-        artwork: s?.art || "",
-        playbackState: s?.playing ? "playing" : s?.track ? "paused" : "none",
-        position: 0,
-        duration: 0,
-        volume: s?.volume == null ? 1 : Number(s.volume),
-      });
-    });
+      if (d.type !== "request") return;
+      try {
+        if (!ASTRAL_PAGE_OPS.has(d.op)) throw new Error("Unknown action.");
+        const result = await astralRequest(d.op, d.payload);
+        post({ type: "reply", id: d.id, ok: true, result: result ?? null });
+      } catch (err) {
+        post({ type: "reply", id: d.id, ok: false, error: String((err && err.message) || err) });
+      }
+    };
+    window.addEventListener("message", this.pageRelay);
+    this.offIdentity = onAstralIdentity((user) => post({ type: "identity", user }));
   }
 
   setupMessageBridge(winId) {
@@ -423,8 +434,14 @@ export class ShittifyApp extends BaseApp {
       this.msgListener = null;
     }
     this.iframe = null;
-    if (this.native) { this.native.destroy(); this.native = null; }
-    if (this.offMusic) { this.offMusic(); this.offMusic = null; }
+    if (this.pageRelay) {
+      window.removeEventListener("message", this.pageRelay);
+      this.pageRelay = null;
+    }
+    if (this.offIdentity) {
+      this.offIdentity();
+      this.offIdentity = null;
+    }
     audioMixer().unregisterWindow(winId);
     os.tray.unregister(winId);
     this.notify("Evil Spotify", "Music player closed", "info", 3000);
