@@ -8,6 +8,9 @@ export const ADSTERRA_KEYS = {
   storeRect: "ee9dc67de90729e2804aa8aba6454ec8",
 };
 
+// Embedded builds (Astral OS) never load ad networks. See vite.config.js.
+export const ADS_BLOCKED = import.meta.env?.VITE_EMBED === "true";
+
 export function hardenAdEnvironment() {
   if (window.__yukiAdHardened) return;
   window.__yukiAdHardened = true;
@@ -24,6 +27,7 @@ export function hardenAdEnvironment() {
 hardenAdEnvironment();
 
 export function shouldEnableAds() {
+  if (ADS_BLOCKED) return false;
   const hostname = window.location.hostname;
   if (hostname.includes("vercel")) {
     return false;
@@ -43,6 +47,7 @@ export function injectAdsterraAd(
   delay = 0,
   format = "iframe",
 ) {
+  if (ADS_BLOCKED) return;
   const doInject = () => {
     const slot = $("#" + containerId);
     if (!slot) return;
@@ -63,6 +68,7 @@ export function injectAdsterraAd(
 }
 
 export function injectNativeAd(containerId) {
+  if (ADS_BLOCKED) return;
   const slot = $("#" + containerId);
   if (!slot) return;
   const s = createElement("script");
@@ -91,6 +97,7 @@ export function suppressAdBlocks(container) {
 }
 
 export function buildGameAdBannerHtml(key) {
+  if (ADS_BLOCKED) return "";
   return `<div id="yukios-game-ad-banner">
   <div class="yukios-game-ad-label">Advertisement</div>
   <button class="yukios-game-ad-close" title="Close advertisement">&times;</button>

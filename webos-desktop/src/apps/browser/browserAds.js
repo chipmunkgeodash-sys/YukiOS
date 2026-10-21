@@ -1,4 +1,4 @@
-import { ADSTERRA_KEYS } from "../../ads.js";
+import { ADSTERRA_KEYS, ADS_BLOCKED } from "../../ads.js";
 
 const closeTimers = new WeakMap();
 const showTimers = new WeakMap();
@@ -45,6 +45,7 @@ function clearShowTimer(adBar) {
 }
 
 function injectAdScripts(adSlot) {
+  if (ADS_BLOCKED) return;
   adSlot.setAttribute("data-ads-loaded", "1");
   const cfg = document.createElement("script");
   cfg.text =

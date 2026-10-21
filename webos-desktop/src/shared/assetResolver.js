@@ -234,6 +234,8 @@ let currentMirrorId = null;
 const LOCAL_DEV_STATIC_BASE = "http://localhost:4001";
 
 function isLocalDevHost() {
+  // Embedded builds (Astral OS) always use the CDN, even on localhost.
+  if (import.meta.env?.VITE_EMBED === "true") return false;
   try {
     const host = window.location?.hostname || "";
     return host === "localhost" || host === "127.0.0.1" || host === "::1";

@@ -17,7 +17,9 @@ export function isDeckBootVideoVisible() {
 
 function getBootVideoUrl() {
   const hostname = window.location?.hostname || "";
-  const isLocal = hostname === "localhost" || hostname === "127.0.0.1";
+  const isLocal =
+    import.meta.env?.VITE_EMBED !== "true" &&
+    (hostname === "localhost" || hostname === "127.0.0.1");
   return isLocal
     ? "http://localhost:4001/static/videos/deckboot.mp4"
     : resolveYukiAsset("static/videos/deckboot.mp4");

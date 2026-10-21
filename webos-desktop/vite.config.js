@@ -514,7 +514,7 @@ if (isSingleFile) {
 }
 
 export default defineConfig({
-  base: isSingleFile || isElectronBuild ? "./" : "/",
+  base: process.env.VITE_BASE || (isSingleFile || isElectronBuild ? "./" : "/"),
   plugins,
   server: {
     host: "127.0.0.1",
