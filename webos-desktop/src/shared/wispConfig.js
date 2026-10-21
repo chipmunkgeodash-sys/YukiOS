@@ -8,6 +8,7 @@ export const WISP_SERVERS = [
     name: "Reeyuki Wisp",
     url: "wss://hurt-agata-liventcord-api-7072e9a6.koyeb.app/",
   },
+  { name: "Anura Wisp", url: "wss://anura.pro/" },
   { name: "Legacy Wisp (Epoxy only)", url: "wss://racialequityleadership.com/ws?reconnect=1" },
 ];
 
