@@ -1,5 +1,7 @@
 import { resolveGhUrl, resolveIconUrl } from "../shared/assetResolver.js";
 import { audioMixer } from "../audioMixer.js";
+import { mountAstralMusic } from "./astralMusic.js";
+import { astralRequest, getMusicState, inAstral, onMusicState } from "../shared/astralBridge.js";
 import {
   BaseApp,
   os,
@@ -272,6 +274,13 @@ export class ShittifyApp extends BaseApp {
     );
     this.setupMessageBridge(winId);
 
+    // Inside Astral OS the player is Astral's own (shared playlist, featured,
+    // your playlists); the third-party page below is for every other build.
+    if (inAstral()) {
+      this.mountNative(winId, contentDiv);
+      return;
+    }
+
     try {
       const res = await fetch(resolvedUrl);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -329,6 +338,36 @@ export class ShittifyApp extends BaseApp {
     }
   }
 
+  mountNative(winId, contentDiv) {
+    contentDiv.style.cssText = "width:100%; height:100%; overflow:hidden; position:relative;";
+    contentDiv.innerHTML = "";
+    this.native = mountAstralMusic(contentDiv);
+    // Media keys and the volume mixer drive Astral's player.
+    audioMixer().setChannelCommandHandler(winId, (cmd, data) => {
+      const playing = !!getMusicState()?.playing;
+      if (cmd === "play" && !playing) astralRequest("music.toggle").catch(() => {});
+      else if (cmd === "pause" && playing) astralRequest("music.toggle").catch(() => {});
+      else if (cmd === "nexttrack") astralRequest("music.next").catch(() => {});
+      else if (cmd === "previoustrack") astralRequest("music.previous").catch(() => {});
+      else if (cmd === "volume") {
+        const v = data && data.value != null ? data.value : data && data.volume;
+        astralRequest("music.volume", { value: v }).catch(() => {});
+      }
+    });
+    this.offMusic = onMusicState((s) => {
+      audioMixer().updateChannelMeta(winId, {
+        track: s?.track || "",
+        artist: s?.artist || "",
+        album: "",
+        artwork: s?.art || "",
+        playbackState: s?.playing ? "playing" : s?.track ? "paused" : "none",
+        position: 0,
+        duration: 0,
+        volume: s?.volume == null ? 1 : Number(s.volume),
+      });
+    });
+  }
+
   setupMessageBridge(winId) {
     if (this.msgListener) {
       window.removeEventListener("message", this.msgListener);
@@ -384,6 +423,8 @@ export class ShittifyApp extends BaseApp {
       this.msgListener = null;
     }
     this.iframe = null;
+    if (this.native) { this.native.destroy(); this.native = null; }
+    if (this.offMusic) { this.offMusic(); this.offMusic = null; }
     audioMixer().unregisterWindow(winId);
     os.tray.unregister(winId);
     this.notify("Evil Spotify", "Music player closed", "info", 3000);

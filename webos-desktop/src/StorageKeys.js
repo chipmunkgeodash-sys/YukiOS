@@ -1,6 +1,7 @@
 export const StorageKeys = {
   username: "yukiOS_username",
   profilePicture: "yukiOS_profilePicture",
+  astralLinkedName: "yukiOS_astralLinkedName",
   weather: "yukiOS_weather",
   positionsKey: "yukiOS_desktop:icon-positions",
   favoritesKey: "yukiOS_Favorites",

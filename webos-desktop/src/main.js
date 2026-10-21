@@ -20,6 +20,7 @@ import { V86App } from "./apps/v86.js";
 import { setDesktopUI, handleSteamUrlParam } from "./games/games.js";
 import { registerPWA } from "./pwa/pwa.js";
 import { SessionManager } from "./SessionManager.js";
+import { initAstralBridge } from "./shared/astralBridge.js";
 import { CommandPalette } from "./commandPalette.js";
 import { ClipboardManager } from "./systemClipboardManager.js";
 import { initializeMirrors } from "./shared/assetResolver.js";
@@ -146,6 +147,7 @@ setDesktopUI(desktopUI);
 
 const sessionManager = new SessionManager(os);
 os.app.register("sessionManager", sessionManager);
+initAstralBridge();
 const commandPalette = new CommandPalette(os);
 os.app.register("commandPalette", commandPalette);
 
