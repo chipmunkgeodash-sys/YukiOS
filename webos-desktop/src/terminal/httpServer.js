@@ -129,7 +129,7 @@ export async function startVirtualHttpServer(ctx, options) {
   ctx.print("Serving directory " + rootPath);
   ctx.print(
     "Press Ctrl+C to stop the server. Open the " +
-      "Yuki Browser" +
+      "Astral Browser" +
       " and go to http://localhost:" +
       port +
       "/",

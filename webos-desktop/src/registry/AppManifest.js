@@ -77,7 +77,7 @@ export const APP_MANIFESTS = [
       animation: ClippyAnimation.Show,
     },
     description:
-      "Displays system updates, release notes, and changelog entries for YukiOS features and improvements.",
+      "Displays system updates, release notes, and changelog entries for Astral OS features and improvements.",
   },
   {
     serviceKey: "calculatorApp",
@@ -163,7 +163,7 @@ export const APP_MANIFESTS = [
     serviceKey: "monacoApp",
     enhanced: true,
     type: "system",
-    title: "Yuki Code",
+    title: "Astral Code",
     icon: "papirus:apps/vscode",
     launchType: "instance",
     windowIdPatterns: ["monaco"],
@@ -180,7 +180,7 @@ export const APP_MANIFESTS = [
     serviceKey: "emulatorApp",
     enhanced: true,
     type: "system",
-    title: "Yuki Emulator",
+    title: "Astral Emulator",
     icon: `${CDN_BASE}/static/icons/emulator.webp`,
     launchType: "instance",
     windowIdPatterns: ["emulator"],
@@ -249,7 +249,7 @@ export const APP_MANIFESTS = [
     serviceKey: "yukiConvertApp",
     enhanced: false,
     type: "system",
-    title: "Yuki Convert",
+    title: "Astral Convert",
     icon: "papirus:actions/swap-panels",
     launchType: "instance",
     windowIdPatterns: ["yuki-convert"],
@@ -274,7 +274,7 @@ export const APP_MANIFESTS = [
       animation: ClippyAnimation.Greeting,
     },
     description:
-      "Initial setup guide for new users to configure YukiOS preferences.",
+      "Initial setup guide for new users to configure Astral OS preferences.",
   },
   {
     serviceKey: "dataEditorApp",
@@ -296,7 +296,7 @@ export const APP_MANIFESTS = [
     serviceKey: "yukiOsGuideApp",
     enhanced: true,
     type: "system",
-    title: "YukiOS Guide",
+    title: "Astral OS Guide",
     icon: "papirus:apps/accessories-dictionary",
     launchType: "instance",
     windowIdPatterns: ["yuki-os-guide", "yukios-guide"],
@@ -306,7 +306,7 @@ export const APP_MANIFESTS = [
       animation: ClippyAnimation.Show,
     },
     description:
-      "Comprehensive documentation and feature discovery hub for YukiOS.",
+      "Comprehensive documentation and feature discovery hub for Astral OS.",
   },
   {
     serviceKey: "introTourApp",
@@ -329,7 +329,7 @@ export const APP_MANIFESTS = [
     windowIdPatterns: [],
     category: "system",
     description:
-      "Switch between desktop modes: MacOS, SteamDeck, ChromeOS, Tiling, and YukiOS default.",
+      "Switch between desktop modes: MacOS, SteamDeck, ChromeOS, Tiling, and Astral OS default.",
   },
   {
     serviceKey: "clipboardManagerApp",
@@ -351,7 +351,7 @@ export const APP_MANIFESTS = [
     serviceKey: "aiAssistantApp",
     enhanced: false,
     type: "system",
-    title: "Yuki AI Assistant",
+    title: "Astral AI Assistant",
     icon: "papirus:apps/gnome-robots",
     launchType: "instance",
     windowIdPatterns: ["ai-assistant"],
@@ -454,7 +454,7 @@ export const APP_MANIFESTS = [
   {
     serviceKey: "browserApp",
     type: "system",
-    title: "Yuki Browser",
+    title: "Astral Browser",
     icon: `${CDN_BASE}/static/icons/chrome.webp`,
     launchType: "instance",
     windowIdPatterns: ["scramjet-window", "browser"],
@@ -468,74 +468,7 @@ export const APP_MANIFESTS = [
       animation: ClippyAnimation.Wave,
     },
     description:
-      "CORS proxy browser with bookmarks, history, tab management, and Tor anonymous browsing within YukiOS.",
-  },
-  {
-    serviceKey: "discordApp",
-    enhanced: true,
-    type: "system",
-    title: "Discord",
-    icon: "papirus:apps/discord",
-    launchType: "instance",
-    windowIdPatterns: ["discord"],
-    category: "internet",
-    persistContentState: false,
-    clippy: {
-      message: "Chat with friends on Discord",
-      animation: ClippyAnimation.Wave,
-    },
-    description:
-      "Chat with friends, hop into voice, and keep up with your communities on Discord.",
-    windowSize: ["90vw", "85vh"],
-    trayOptions: {
-      contextMenuItems: [
-        {
-          label: "Mute",
-          action: () => {
-            console.log("Discord: Mute");
-          },
-          icon: "papirus:status/notification-microphone-sensitivity-muted",
-        },
-        {
-          label: "Deafen",
-          action: () => {
-            console.log("Discord: Deafen");
-          },
-          icon: "papirus:status/audio-volume-muted",
-        },
-        {
-          type: "divider",
-        },
-        {
-          label: "Status: Online",
-          action: () => {
-            console.log("Discord: Set status to Online");
-          },
-          icon: "papirus:actions/draw-circle",
-        },
-        {
-          label: "Status: Idle",
-          action: () => {
-            console.log("Discord: Set status to Idle");
-          },
-          icon: "papirus:status/weather-clear-night",
-        },
-        {
-          label: "Status: DND",
-          action: () => {
-            console.log("Discord: Set status to DND");
-          },
-          icon: "papirus:actions/im-ban-user",
-        },
-        {
-          label: "Status: Invisible",
-          action: () => {
-            console.log("Discord: Set status to Invisible");
-          },
-          icon: "papirus:actions/view-hidden",
-        },
-      ],
-    },
+      "CORS proxy browser with bookmarks, history, tab management, and Tor anonymous browsing within Astral OS.",
   },
   {
     serviceKey: "youtubeApp",
@@ -1179,18 +1112,18 @@ export const APP_MANIFESTS = [
   {
     serviceKey: "yukiDevToolsApp",
     type: "system",
-    title: "Yuki Dev Tools",
+    title: "Astral Dev Tools",
     icon: "papirus:apps/vscode",
     launchType: "method",
     launchMethod: "openYukiDevToolsApp",
     windowIdPatterns: ["yukidevtools", "yuki-dev-tools"],
     category: "development",
     clippy: {
-      message: "Open IT Tools with Yuki styling and a live iframe bridge.",
+      message: "Open IT Tools with Astral styling and a live iframe bridge.",
       animation: ClippyAnimation.GetWizardy,
     },
     description:
-      "IT Tools wrapped in a Yuki-themed iframe with live CSS bridging.",
+      "IT Tools wrapped in a Astral-themed iframe with live CSS bridging.",
   },
   {
     serviceKey: "erudaApp",
@@ -1273,7 +1206,7 @@ export const APP_MANIFESTS = [
   {
     serviceKey: "steamApp",
     type: "system",
-    title: "Yuki Steam",
+    title: "Astral Steam",
     icon: "papirus:apps/steam",
     launchType: "steam",
     windowIdPatterns: ["games-app"],
@@ -1283,7 +1216,7 @@ export const APP_MANIFESTS = [
       animation: ClippyAnimation.Wave,
     },
     description:
-      "Game storefront and launcher interface for browsing, managing, and launching games through Yuki Steam integration.",
+      "Game storefront and launcher interface for browsing, managing, and launching games through Astral Steam integration.",
   },
   {
     serviceKey: "appCreatorApp",
@@ -1732,7 +1665,7 @@ export const APP_MANIFESTS = [
     serviceKey: "remoteHostApp",
     enhanced: true,
     type: "system",
-    title: "Yuki Remote Desktop",
+    title: "Astral Remote Desktop",
     icon: "papirus:devices/computer",
     launchType: "instance",
     windowIdPatterns: ["remote-host"],

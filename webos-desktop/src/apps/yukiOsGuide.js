@@ -70,7 +70,7 @@ const SHOWCASE = [
   {
     group: "Play something",
     icon: "fab fa-steam",
-    title: "Yuki Steam",
+    title: "Astral Steam",
     desc: "Browse and launch 3000+ games from a full library.",
     action: "steamApp",
   },
@@ -103,7 +103,7 @@ export class YukiOsGuideApp extends BaseApp {
   async open(opts = {}) {
     const win = os.window.create(
       "yuki-os-guide",
-      "YukiOS Guide",
+      "Astral OS Guide",
       "980px",
       "720px",
       {
@@ -195,7 +195,7 @@ export class YukiOsGuideApp extends BaseApp {
             <i class="fas fa-rocket"></i>
           </div>
           <div class="guide-hero-content">
-            <h1>Welcome to YukiOS</h1>
+            <h1>Welcome to Astral OS</h1>
             <p class="guide-tagline">A full desktop inside one browser tab. No installs, nothing to block, everything saved.</p>
             <p class="guide-blurb">Everything on this page is real and running right now. Drag windows, browse the web, open a terminal, or boot a retro game, then close the tab and come back later. It all remembers.</p>
             <button class="guide-tour-btn" type="button"><i class="fas fa-play"></i> Take the 60-second tour</button>
@@ -385,14 +385,14 @@ export class YukiOsGuideApp extends BaseApp {
       <div class="guide-section">
         <div class="guide-header">
           <h1><i class="fas fa-th-large"></i> Tiling Mode</h1>
-          <p>Hyprland-inspired automatic window tiling for YukiOS</p>
+          <p>Hyprland-inspired automatic window tiling for Astral OS</p>
         </div>
 
         <div class="guide-subsection">
           <div class="feature-card" style="margin-bottom:12px">
             <div class="feature-icon"><i class="fas fa-th-large"></i></div>
             <h3>Automatic Window Tiling</h3>
-            <p>Select "Yuki Tiling WM" from the login session picker to enable a Hyprland-inspired tiling window manager. Windows are automatically arranged in a non-overlapping layout with a waybar-style status bar at the top.</p>
+            <p>Select "Astral Tiling WM" from the login session picker to enable a Hyprland-inspired tiling window manager. Windows are automatically arranged in a non-overlapping layout with a waybar-style status bar at the top.</p>
           </div>
           <div class="guide-tiling-section">
             ${buildTilingKeybindHTML(searchLower)}

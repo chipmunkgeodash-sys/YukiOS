@@ -70,7 +70,7 @@ export function showIconPicker(options = {}) {
 
   const tabs = createElement("div");
   tabs.className = "start-picker-tabs";
-  tabs.innerHTML = `<button class="start-picker-tab active" data-tab="yuki">Yuki Icons</button><button class="start-picker-tab" data-tab="upload">Upload</button>`;
+  tabs.innerHTML = `<button class="start-picker-tab active" data-tab="yuki">Astral Icons</button><button class="start-picker-tab" data-tab="upload">Upload</button>`;
   dialog.appendChild(tabs);
 
   const content = createElement("div");

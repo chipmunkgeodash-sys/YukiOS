@@ -16,7 +16,7 @@ import {
 import { parseBool } from "./utils/utils.js";
 import { isFunction } from "./shared/functionUtils.js";
 
-const BRAND = "YukiOS";
+const BRAND = "Astral OS";
 const MIN_DURATION = 2500;
 
 export function showBootScreen() {

@@ -706,7 +706,7 @@ export class RoomRenderer {
       );
       steam.rotation.x = (i - 1) * 0.1;
       steam.rotation.z = (i - 1) * 0.1;
-      steam.userData.title = "Yuki Steam";
+      steam.userData.title = "Astral Steam";
       this.scene.add(steam);
     }
   }

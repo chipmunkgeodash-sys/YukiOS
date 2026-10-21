@@ -47,7 +47,7 @@ export class WindowManager {
     this.gameWindowCount = 0;
     this.isDraggingWindow = false;
     this.notificationCenter = notificationCenter;
-    this.initialTitle = document.title || "YukiOS";
+    this.initialTitle = document.title || "Astral OS";
     const faviconLink = $("link[rel~='icon']");
     this.initialFavicon = faviconLink ? faviconLink.href : "";
     this.snapGhost = null;

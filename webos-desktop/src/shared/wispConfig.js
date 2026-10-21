@@ -1,15 +1,14 @@
 import { os, StorageKeys } from "../framework.js";
 
-export const DEFAULT_WISP_URL =
-  "wss://racialequityleadership.com/ws?reconnect=1";
+export const DEFAULT_WISP_URL = "wss://wisp.mercurywork.shop/";
 
 export const WISP_SERVERS = [
-  { name: "Primary Wisp", url: DEFAULT_WISP_URL },
+  { name: "Mercury Wisp", url: DEFAULT_WISP_URL },
   {
     name: "Reeyuki Wisp",
     url: "wss://hurt-agata-liventcord-api-7072e9a6.koyeb.app/",
   },
-  { name: "Mercury Wisp", url: "wss://wisp.mercurywork.shop/" },
+  { name: "Legacy Wisp (Epoxy only)", url: "wss://racialequityleadership.com/ws?reconnect=1" },
 ];
 
 const RETIRED_WISP_URLS = ["wss://reeyukiwisp.onrender.com/"];

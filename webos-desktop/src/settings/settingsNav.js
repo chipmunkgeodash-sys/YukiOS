@@ -127,7 +127,7 @@ export const SETTINGS_GROUPS = [
       },
       {
         id: "steam",
-        title: "Yuki Steam",
+        title: "Astral Steam",
         icon: "fab fa-steam",
         pane: "pane-gaming",
       },

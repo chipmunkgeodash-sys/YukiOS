@@ -120,7 +120,7 @@ export async function loginWithAccount(identifier, password) {
   if (isSocialDisabled())
     return {
       error:
-        "Social features are disabled. Enable them in Yuki Steam Settings.",
+        "Social features are disabled. Enable them in Astral Steam Settings.",
     };
   try {
     const res = await analyticsFetch(`${SOCIAL_BASE}/live/account/login`, {
@@ -152,7 +152,7 @@ export async function registerAccount({ nickname, password }) {
   if (isSocialDisabled())
     return {
       error:
-        "Social features are disabled. Enable them in Yuki Steam Settings.",
+        "Social features are disabled. Enable them in Astral Steam Settings.",
     };
   const currentId = getLiveUserId();
   try {

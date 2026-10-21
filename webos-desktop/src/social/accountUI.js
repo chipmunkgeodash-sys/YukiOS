@@ -9,7 +9,7 @@ import { escapeHtml } from "../utils/utils.js";
 import { callIfFunction } from "../shared/functionUtils.js";
 
 export const ACCOUNT_DISCLAIMER =
-  "This is a YukiOS login. YukiOS is not affiliated with Steam or Valve.";
+  "This is a Astral OS login. Astral OS is not affiliated with Steam or Valve.";
 
 export function buildAccountStatusHtml() {
   const account = getAccountStatus();

@@ -48,7 +48,7 @@ export class MonacoApp extends BaseApp {
       try {
         await this.loadMonaco();
       } catch (e) {
-        os.notify.send("Couldn't load Yuki Code", AppSource.MONACO);
+        os.notify.send("Couldn't load Astral Code", AppSource.MONACO);
         return;
       }
     }
@@ -393,7 +393,7 @@ export class MonacoApp extends BaseApp {
   }
 
   getHeaderHTML(title) {
-    return buildWindowHeader("Yuki Code");
+    return buildWindowHeader("Astral Code");
   }
 
   createTab(tabId, title, isDirty = false) {
@@ -428,7 +428,7 @@ export class MonacoApp extends BaseApp {
 
   createNewWindow() {
     const winId = `monaco-window-${Date.now()}`;
-    const win = os.window.create(winId, "Yuki Code", "900px", "650px", {
+    const win = os.window.create(winId, "Astral Code", "900px", "650px", {
       icon: "fas fa-code",
     });
 
@@ -598,7 +598,7 @@ export class MonacoApp extends BaseApp {
   initTerminal() {
     if (!this.terminalOutput) return;
     this.terminalOutput.innerHTML = "";
-    this.printToTerminal("YukiOS Terminal");
+    this.printToTerminal("Astral OS Terminal");
     this.printToTerminal("Type 'help' for available commands");
     this.updateTerminalPrompt();
   }
@@ -1772,7 +1772,7 @@ export class MonacoApp extends BaseApp {
         window.open("https://code.visualstudio.com/docs", "_blank"),
       about: () => {
         showAboutDialog({
-          title: "Yuki Code",
+          title: "Astral Code",
           version: "1.0.0",
           description:
             "A powerful code editor built on Monaco, the engine behind VS Code. Write, edit, and manage code with syntax highlighting, multi-tab editing, and an integrated terminal.",

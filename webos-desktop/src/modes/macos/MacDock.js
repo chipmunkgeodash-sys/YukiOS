@@ -32,7 +32,7 @@ const DEFAULT_DOCK_APPS = [
   },
   {
     appId: "browserApp",
-    title: "Yuki Browser",
+    title: "Astral Browser",
     icon: "static/icons/chrome.webp",
     color: "#fff",
   },
@@ -59,12 +59,6 @@ const DEFAULT_DOCK_APPS = [
     title: "Notes",
     icon: "static/icons/notepad.webp",
     color: "#ffc107",
-  },
-  {
-    appId: "discordApp",
-    title: "Discord",
-    icon: "papirus:apps/discord",
-    color: "#5865f2",
   },
   {
     appId: "trashApp",

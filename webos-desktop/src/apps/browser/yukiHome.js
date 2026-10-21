@@ -433,13 +433,6 @@ export function buildYukiHomeSrcdoc() {
         </div>
         <span class="shortcut-label">GitHub</span>
       </a>
-      <a class="shortcut preset-shortcut" data-url="https://discord.com">
-        <span class="shortcut-close" data-url="https://discord.com">&times;</span>
-        <div class="shortcut-icon">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" />
-        </div>
-        <span class="shortcut-label">Discord</span>
-      </a>
       <a class="shortcut preset-shortcut" data-url="https://twitter.com">
         <span class="shortcut-close" data-url="https://twitter.com">&times;</span>
         <div class="shortcut-icon">

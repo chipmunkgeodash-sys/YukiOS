@@ -648,7 +648,7 @@ function buildProfileHtml(user, opts) {
           <div class="steam-profile-featured">
             <div class="steam-profile-featured-medal"><i class="fas fa-medal"></i></div>
             <div class="steam-profile-featured-text">
-              <div class="steam-profile-featured-title">YukiOS Player</div>
+              <div class="steam-profile-featured-title">Astral OS Player</div>
               <div class="steam-profile-featured-xp">${stats.xp} XP</div>
             </div>
           </div>
@@ -3410,7 +3410,7 @@ export async function renderLoginPage(pageEl, options = {}) {
       <div class="steam-login-brand">
         <div class="steam-login-brand-icon"><i class="fas fa-snowflake"></i></div>
         <div>
-          <h2 class="steam-login-title">Sign in to YukiOS</h2>
+          <h2 class="steam-login-title">Sign in to Astral OS</h2>
           <p class="steam-login-subtitle">Keep your profile, achievements and playtime across devices. No email needed.</p>
         </div>
       </div>

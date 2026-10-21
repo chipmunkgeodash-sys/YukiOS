@@ -642,7 +642,7 @@ class GameWindowRenderer {
         : [
             {
               image: "fas fa-snowflake",
-              title: "Yuki Steam App Added",
+              title: "Astral Steam App Added",
               date: "May 1, 2026",
             },
           ];
@@ -675,7 +675,7 @@ class GameWindowRenderer {
       return descriptionMap[appId];
     }
     const title = appMap[appId]?.title || appId;
-    return `Experience ${title} on YukiOS. This game is part of your Yuki Steam library.`;
+    return `Experience ${title} on Astral OS. This game is part of your Astral Steam library.`;
   }
 
   setCurrentGame(appId) {

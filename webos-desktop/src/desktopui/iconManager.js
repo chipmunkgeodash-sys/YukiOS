@@ -51,8 +51,7 @@ const HARDCODED_DESKTOP_ICONS = [
     name: "Evil Spotify",
     icon: "static/icons/shittify.webp",
   },
-  { app: "steamApp", name: "Yuki Steam", icon: "papirus:apps/steam" },
-  { app: "discordApp", name: "Discord", icon: "papirus:apps/discord" },
+  { app: "steamApp", name: "Astral Steam", icon: "papirus:apps/steam" },
   {
     app: "geometryTodayApp",
     name: "Cloud Gaming (Geometry Today)",

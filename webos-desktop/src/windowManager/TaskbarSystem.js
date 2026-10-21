@@ -710,15 +710,8 @@ export class TaskbarSystem {
         {
           winId: "browser-pinned",
           appId: "browserApp",
-          title: "Yuki Browser",
+          title: "Astral Browser",
           iconValue: resolveIconUrl("static/icons/chrome.webp"),
-          color: null,
-        },
-        {
-          winId: "discord-pinned",
-          appId: "discordApp",
-          title: "Discord",
-          iconValue: "papirus:apps/discord",
           color: null,
         },
         {

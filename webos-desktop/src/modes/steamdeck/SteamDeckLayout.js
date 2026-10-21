@@ -204,7 +204,7 @@ const buildHomeHtml = (games) => `
 
     <div class="deck-foot">
       <div class="deck-foot-left">
-        <button class="deck-foot-btn" title="Yuki Deck" data-action="deckHome"><span>Yuki Deck</span></button>
+        <button class="deck-foot-btn" title="Astral Deck" data-action="deckHome"><span>Astral Deck</span></button>
         <button class="deck-foot-btn deck-foot-btn-menu" title="Menu" data-action="menu"><span>Menu</span></button>
       </div>
       <div class="deck-foot-right">
@@ -272,7 +272,7 @@ const buildShellHtml = () => `
     </div>
     <div class="deck-foot">
       <div class="deck-foot-left">
-        <button class="deck-foot-btn" title="Yuki Deck" data-action="deckHome"><span>Yuki Deck</span></button>
+        <button class="deck-foot-btn" title="Astral Deck" data-action="deckHome"><span>Astral Deck</span></button>
         <button class="deck-foot-btn deck-foot-btn-menu" title="Menu" data-action="menu"><span>Menu</span></button>
       </div>
       <div class="deck-foot-right">
@@ -1292,7 +1292,7 @@ export class SteamDeckLayout {
           </div>
         </div>
         <div class="deck-overview-subbar">
-          <div class="deck-overview-cloud"><i class="fas fa-cloud"></i><span>Yuki Steam Cloud: Up To Date</span></div>
+          <div class="deck-overview-cloud"><i class="fas fa-cloud"></i><span>Astral Steam Cloud: Up To Date</span></div>
           <div class="deck-overview-tabs">${this.buildOverviewTabs(tab)}</div>
         </div>
         <div class="deck-overview-content" id="deck-overview-content"></div>

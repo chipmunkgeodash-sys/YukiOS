@@ -199,7 +199,7 @@ export function buildSteamShell(
         <i class="fab fa-steam" style="font-size: 20px; margin-right: 8px;"></i>
         <div class="steam-menu-items">
           <div class="steam-dropdown">
-            <span class="steam-menu-item steam-dropdown-trigger" data-dropdown="steam-menu">Yuki</span>
+            <span class="steam-menu-item steam-dropdown-trigger" data-dropdown="steam-menu">Astral</span>
             <div class="steam-dropdown-menu" id="steam-menu-dropdown">
               <div class="steam-dropdown-item" data-action="steam-settings">Settings</div>
               <div class="steam-dropdown-item" data-action="steam-account">Account</div>
@@ -405,7 +405,7 @@ export function initDropdowns(container, navigateTo, openFriendsWindow, wm) {
         {
           id: "up-social-tour",
           action: "up-social-tour",
-          label: "Yuki Steam Tour",
+          label: "Astral Steam Tour",
           icon: "fa-question-circle",
         },
       ];

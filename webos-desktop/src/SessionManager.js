@@ -56,9 +56,9 @@ export class SessionManager {
     this.skipSetup = false;
     this.selectedUser = null;
     this.selectedSession =
-      os.storage.get(StorageKeys.selectedSession) || "Yuki Desktop(Default)";
-    if (HIDE_WIN11 && this.selectedSession === "Yuki Windows 11") {
-      this.selectedSession = "Yuki Desktop(Default)";
+      os.storage.get(StorageKeys.selectedSession) || "Astral Desktop(Default)";
+    if (HIDE_WIN11 && this.selectedSession === "Astral Windows 11") {
+      this.selectedSession = "Astral Desktop(Default)";
       os.storage.set(StorageKeys.selectedSession, this.selectedSession);
     }
     this.ensureUserId();
@@ -203,8 +203,8 @@ export class SessionManager {
     if (directBoot) this.skipSetup = true;
 
     if (directBoot) {
-      if (deckParam) this.selectedSession = "Yuki Deck Mode";
-      if (redParam) this.selectedSession = "Yuki Desktop(Default)";
+      if (deckParam) this.selectedSession = "Astral Deck Mode";
+      if (redParam) this.selectedSession = "Astral Desktop(Default)";
 
       this.currentSession = {
         name: os.storage.get(StorageKeys.username) || "Guest",
@@ -218,7 +218,7 @@ export class SessionManager {
 
     const autoLogin = os.storage.get(StorageKeys.autoLogin);
 
-    if (this.selectedSession === "Yuki Deck Mode") {
+    if (this.selectedSession === "Astral Deck Mode") {
       if (autoLogin && os.storage.get(StorageKeys.username)) {
         this.currentSession = {
           name: os.storage.get(StorageKeys.username) || "Guest",
@@ -297,19 +297,16 @@ export class SessionManager {
       <div class="session-wallpaper"></div>
       <div class="session-background"></div>
       <div class="session-content${state === "locked" ? "" : " extra-hidden"}">
-        <div class="session-brand">YukiOS</div>
+        <div class="session-brand">Astral OS</div>
         <div class="session-time">${timeStr}</div>
         <div class="session-date">${dateStr}</div>
 
         <div class="session-extra">
-        <div class="session-support-btn" id="session-support-btn" title="Support YukiOS">
+        <div class="session-support-btn" id="session-support-btn" title="Support Astral OS">
           <img src="https://cdn.jsdelivr.net/gh/PapirusDevelopmentTeam/papirus-icon-theme@master/Papirus/22x22/emotes/face-smile.svg" class="papirus-icon papirus-icon--22" alt="" />
         </div>
         <a class="session-github-btn" href="https://github.com/Reeyuki/YukiOS" target="_blank" rel="noopener" title="Star Us On Github">
           <img src="https://cdn.jsdelivr.net/gh/PapirusDevelopmentTeam/papirus-icon-theme@master/Papirus/22x22/apps/github.svg" class="papirus-icon papirus-icon--22" alt="" />
-        </a>
-        <a class="session-discord-btn" href="https://discord.gg/wufbWFwr4G" target="_blank" rel="noopener" title="Join Discord">
-          <img src="https://cdn.jsdelivr.net/gh/PapirusDevelopmentTeam/papirus-icon-theme@master/Papirus/22x22/apps/discord.svg" class="papirus-icon papirus-icon--22" alt="" />
         </a>
         <div class="session-status-widget" id="session-status-widget">
           <button class="session-status-toggle" id="session-status-toggle" title="System status" type="button">
@@ -320,7 +317,7 @@ export class SessionManager {
           <div class="session-status-panel" id="session-status-panel">
             <div class="status-info-row">
               <span class="status-info-label">Version</span>
-              <span class="status-info-value">YukiOS ${YUKIOS_VERSION}</span>
+              <span class="status-info-value">Astral OS ${YUKIOS_VERSION}</span>
             </div>
             <div class="status-info-row">
               <span class="status-info-label">Build</span>
@@ -398,7 +395,7 @@ export class SessionManager {
             <div class="session-modes-grid">
               <button type="button" class="session-mode-btn" data-mode="reset">
                 <img src="https://cdn.jsdelivr.net/gh/PapirusDevelopmentTeam/papirus-icon-theme@master/Papirus/48x48/status/weather-snow.svg" class="papirus-icon papirus-icon--32" alt="" />
-                <span>YukiOS</span>
+                <span>Astral OS</span>
               </button>
               <button type="button" class="session-mode-btn" data-mode="mac">
                 <img src="https://cdn.jsdelivr.net/gh/PapirusDevelopmentTeam/papirus-icon-theme@master/Papirus/22x22/apps/apple-music.svg" class="papirus-icon papirus-icon--32" alt="" />
@@ -437,7 +434,7 @@ export class SessionManager {
             <img src="https://cdn.jsdelivr.net/gh/PapirusDevelopmentTeam/papirus-icon-theme@master/Papirus/22x22/actions/window-close.svg" class="papirus-icon papirus-icon--22" alt="" />
           </button>
           <img src="https://cdn.jsdelivr.net/gh/PapirusDevelopmentTeam/papirus-icon-theme@master/Papirus/22x22/actions/edit-download.svg" class="papirus-icon papirus-icon--22" alt="" />
-          <span><strong>YukiOS desktop app</strong> Persistent storage, system tray, remote desktop, and faster performance.</span>
+          <span><strong>Astral OS desktop app</strong> Persistent storage, system tray, remote desktop, and faster performance.</span>
           <div class="electron-banner-actions">
             <span class="electron-download-link" id="electron-download-btn"><img src="https://cdn.jsdelivr.net/gh/PapirusDevelopmentTeam/papirus-icon-theme@master/Papirus/22x22/actions/edit-download.svg" class="papirus-icon papirus-icon--22" alt="" /> Download</span>
             <a href="https://github.com/reeyuki/yukios/releases" target="_blank" class="electron-releases-link">View all releases</a>
@@ -513,7 +510,7 @@ export class SessionManager {
               <div class="settings-card-header"><img src="https://cdn.jsdelivr.net/gh/PapirusDevelopmentTeam/papirus-icon-theme@master/Papirus/22x22/apps/utilities-tweak-tool.svg" class="papirus-icon papirus-icon--22" alt="" /> Session Modes</div>
               <div class="settings-row">
                 <div class="settings-label-group">
-                  <span class="settings-label-title">YukiOS</span>
+                  <span class="settings-label-title">Astral OS</span>
                   <span class="settings-label-desc">Default desktop session</span>
                 </div>
                 <label class="settings-toggle">
@@ -563,7 +560,7 @@ export class SessionManager {
               </div>
               <div class="settings-row">
                 <div class="settings-label-group">
-                  <span class="settings-label-title">Yuki Deck</span>
+                  <span class="settings-label-title">Astral Deck</span>
                   <span class="settings-label-desc">Fullscreen handheld gaming shell</span>
                 </div>
                 <label class="settings-toggle">
@@ -612,7 +609,7 @@ export class SessionManager {
               <div class="settings-row">
                 <div class="settings-label-group">
                   <span class="settings-label-title">Social Buttons</span>
-                  <span class="settings-label-desc">Show support, GitHub, and Discord</span>
+                  <span class="settings-label-desc">Show support and GitHub</span>
                 </div>
                 <label class="settings-toggle">
                   <input type="checkbox" data-social-toggle />
@@ -900,7 +897,6 @@ export class SessionManager {
     [
       "session-support-btn",
       "session-github-btn",
-      "session-discord-btn",
     ].forEach((cls) => {
       const el = this.container.querySelector(`.${cls}`);
       if (el) el.style.display = prefs.showSocial ? "" : "none";
@@ -1061,7 +1057,7 @@ export class SessionManager {
       this.bootMiniTls.forEach((tl) => tl.kill && tl.kill());
     this.bootMiniTls = [];
     const savedId = os.storage.get(StorageKeys.selectedBootAnimation) || "";
-    const brandLetters = "YukiOS"
+    const brandLetters = "Astral OS"
       .split("")
       .map((ch) => `<span class="boot-letter">${ch}</span>`)
       .join("");
@@ -1356,13 +1352,13 @@ export class SessionManager {
     }
 
     powerBtn.addEventListener("click", async () => {
-      if (await os.dialog.confirm("Shutdown", `Shut down YukiOS?`)) {
+      if (await os.dialog.confirm("Shutdown", `Shut down Astral OS?`)) {
         window.close();
       }
     });
 
     restartBtn.addEventListener("click", async () => {
-      if (await os.dialog.confirm("Restart", `Restart YukiOS?`)) {
+      if (await os.dialog.confirm("Restart", `Restart Astral OS?`)) {
         location.reload();
       }
     });
@@ -1375,22 +1371,22 @@ export class SessionManager {
       "#session-modes .session-mode-btn",
     );
     const modeToSession = {
-      reset: "Yuki Desktop(Default)",
-      mac: "Yuki Mac Desktop",
-      chromeos: "Yuki Chrome OS",
-      tiling: "Yuki Tiling VM",
-      "3d": "Yuki 3D Desktop",
-      steamdeck: "Yuki Deck Mode",
-      win11: "Yuki Windows 11",
+      reset: "Astral Desktop(Default)",
+      mac: "Astral Mac Desktop",
+      chromeos: "Astral Chrome OS",
+      tiling: "Astral Tiling VM",
+      "3d": "Astral 3D Desktop",
+      steamdeck: "Astral Deck Mode",
+      win11: "Astral Windows 11",
     };
     const sessionToMode = {
-      "Yuki Desktop(Default)": "reset",
-      "Yuki Mac Desktop": "mac",
-      "Yuki Chrome OS": "chromeos",
-      "Yuki Tiling VM": "tiling",
-      "Yuki 3D Desktop": "3d",
-      "Yuki Deck Mode": "steamdeck",
-      "Yuki Windows 11": "win11",
+      "Astral Desktop(Default)": "reset",
+      "Astral Mac Desktop": "mac",
+      "Astral Chrome OS": "chromeos",
+      "Astral Tiling VM": "tiling",
+      "Astral 3D Desktop": "3d",
+      "Astral Deck Mode": "steamdeck",
+      "Astral Windows 11": "win11",
       tiling: "tiling",
     };
     const activeMode = sessionToMode[this.selectedSession] || "reset";
@@ -1713,21 +1709,21 @@ export class SessionManager {
     }
     this.addToUserHistory(this.currentSession);
 
-    if (this.selectedSession !== "Yuki 3D Desktop") {
+    if (this.selectedSession !== "Astral 3D Desktop") {
       await os.fs.setSession(name);
     }
 
     os.events.emit(BusEvents.SESSION_INITIALIZED, this.currentSession);
     liveActivityManager.init();
 
-    if (this.selectedSession === "Yuki Mac Desktop") {
+    if (this.selectedSession === "Astral Mac Desktop") {
       applyMacSettings();
     } else {
       disableMacSettings();
     }
 
     if (
-      this.selectedSession === "Yuki Tiling VM" ||
+      this.selectedSession === "Astral Tiling VM" ||
       this.selectedSession === "tiling"
     ) {
       applyTilingSettings();
@@ -1735,25 +1731,25 @@ export class SessionManager {
       disableTilingSettings();
     }
 
-    if (this.selectedSession === "Yuki Chrome OS") {
+    if (this.selectedSession === "Astral Chrome OS") {
       applyChromeOsSettings();
     } else {
       disableChromeOsSettings();
     }
 
-    if (this.selectedSession === "Yuki Deck Mode") {
+    if (this.selectedSession === "Astral Deck Mode") {
       applySteamDeckSettings();
     } else {
       disableSteamDeckSettings();
     }
 
-    if (this.selectedSession === "Yuki Windows 11") {
+    if (this.selectedSession === "Astral Windows 11") {
       applyWin11Settings();
     } else {
       disableWin11Settings();
     }
 
-    if (this.selectedSession === "Yuki 3D Desktop") {
+    if (this.selectedSession === "Astral 3D Desktop") {
       await this.apply3DSettings();
     } else {
       this.disable3DSettings();
@@ -1765,7 +1761,7 @@ export class SessionManager {
     if (
       !this.skipSetup &&
       !os.storage.get(StorageKeys.setupCompleted) &&
-      this.selectedSession === "Yuki Desktop(Default)"
+      this.selectedSession === "Astral Desktop(Default)"
     ) {
       const setupApp = this.os.app.getInstance(ServiceKeys.SETUP);
       if (setupApp) setTimeout(() => setupApp.open(), 1000);

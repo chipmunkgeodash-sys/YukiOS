@@ -115,7 +115,7 @@ export class AchievementsApp extends BaseApp {
                 <img src="https://cdn.jsdelivr.net/gh/PapirusDevelopmentTeam/papirus-icon-theme@master/Papirus/22x22/actions/games-achievements.svg" class="papirus-icon papirus-icon--22" alt="" />
               </div>
               <h1 class="achievements-hero__title">Achievements</h1>
-              <p class="achievements-hero__subtitle">Track your progress in YukiOS</p>
+              <p class="achievements-hero__subtitle">Track your progress in Astral OS</p>
             </div>
             <div class="achievements-hero__stats">
               <div class="achievements-hero__stat">
@@ -295,14 +295,14 @@ export class AchievementsApp extends BaseApp {
         {
           id: Achievements.SetupComplete,
           title: "Welcome Home",
-          desc: "Finish YukiOS setup wizard",
+          desc: "Finish Astral OS setup wizard",
           icon: "papirus:actions/flag",
           rarity: "uncommon",
         },
         {
           id: Achievements.IntroTourComplete,
           title: "Tour Guide",
-          desc: "Finish the YukiOS intro tour",
+          desc: "Finish the Astral OS intro tour",
           icon: "papirus:apps/maps",
           rarity: "rare",
         },
@@ -457,7 +457,7 @@ export class AchievementsApp extends BaseApp {
           <img src="https://cdn.jsdelivr.net/gh/PapirusDevelopmentTeam/papirus-icon-theme@master/Papirus/22x22/actions/games-achievements.svg" class="papirus-icon papirus-icon--22" alt="" />
         </div>
         <h1 class="achievements-hero__title">Achievements</h1>
-        <p class="achievements-hero__subtitle">Track your progress in YukiOS</p>
+        <p class="achievements-hero__subtitle">Track your progress in Astral OS</p>
         ${
           disabled
             ? `

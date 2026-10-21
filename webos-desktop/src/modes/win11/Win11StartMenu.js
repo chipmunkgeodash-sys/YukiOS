@@ -793,7 +793,7 @@ function buildMenuBar(menuEl) {
       setPowerVisible(powerCont, false);
       let ok = false;
       try {
-        ok = await os.dialog.confirm("Shut down", "Shut down YukiOS?");
+        ok = await os.dialog.confirm("Shut down", "Shut down Astral OS?");
       } catch {
         ok = false;
       }
@@ -827,12 +827,12 @@ function appendWin11CreditPanel() {
   const aboutTitle = createElement("div", {
     className: "text-xl font-semibold",
   });
-  setText(aboutTitle, "About YukiOS");
+  setText(aboutTitle, "About Astral OS");
   aboutContent.appendChild(aboutTitle);
   const aboutIntro = createElement("p");
   setText(
     aboutIntro,
-    "YukiOS is an open source project that replicates the desktop experience on the web using standard web technologies like HTML, CSS, and JavaScript.",
+    "Astral OS is an open source project that replicates the desktop experience on the web using standard web technologies like HTML, CSS, and JavaScript.",
   );
   aboutContent.appendChild(aboutIntro);
   const licensePara = createElement("p");
@@ -857,7 +857,7 @@ function appendWin11CreditPanel() {
   const independentPara = createElement("p");
   setText(
     independentPara,
-    "YukiOS is not in anyway affiliated with Microsoft and should not be confused with Microsoft's Operating System or Products.",
+    "Astral OS is not in anyway affiliated with Microsoft and should not be confused with Microsoft's Operating System or Products.",
   );
   aboutContent.appendChild(independentPara);
   const trademarkPara = createElement("p");

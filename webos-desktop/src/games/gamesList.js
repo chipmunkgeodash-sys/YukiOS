@@ -1245,7 +1245,7 @@ export const appMap = {
     type: "game",
     url: "https://play.unity.com/en/games/c49468cf-ed31-4ee9-ad06-c1addb8a01d4/yukijump",
     icon: "/static/icons/yukiJump.webp",
-    title: "Yuki Jump",
+    title: "Astral Jump",
   },
   starBound: {
     type: "game",

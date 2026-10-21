@@ -20,7 +20,7 @@ const capabilities = [
   {
     tag: "PLAY",
     title: "Games Library",
-    desc: "3000+ games via Yuki Steam integration, Flash (Ruffle), DOS (JS-DOS), and console emulation.",
+    desc: "3000+ games via Astral Steam integration, Flash (Ruffle), DOS (JS-DOS), and console emulation.",
   },
   {
     tag: "APPS",
@@ -40,7 +40,7 @@ const capabilities = [
 ];
 
 const privacyText = `
-  YukiOS collects limited anonymous analytics to help improve stability and usage insights.
+  Astral OS collects limited anonymous analytics to help improve stability and usage insights.
 
   Analytics providers:
   • Anonymous usage analytics
@@ -60,13 +60,13 @@ const privacyText = `
   • Understanding feature usage
   • Diagnosing issues and errors
 
-  YukiOS does not sell user data or share it with advertisers.
+  Astral OS does not sell user data or share it with advertisers.
 `;
 
 const copyrightText = `
   Copyright & Takedown Requests
 
-  YukiOS doesn't host any copyrighted content. Games and apps are loaded from their original sources or CDNs.
+  Astral OS doesn't host any copyrighted content. Games and apps are loaded from their original sources or CDNs.
 
   If you believe something here violates your rights, contact us at:
 
@@ -82,7 +82,7 @@ export class AboutApp extends BaseApp {
   open(opts = {}) {
     const win = os.window.create(
       "about-yukios",
-      "About YukiOS",
+      "About Astral OS",
       "720px",
       "85vh",
       {
@@ -97,7 +97,7 @@ export class AboutApp extends BaseApp {
           <div class="abx-top">
             <div class="abx-mark">
               <img class="abx-badge" src="${resolveIconUrl("static/icons/logo.png")}">
-              <h1 class="abx-title">YukiOS</h1>
+              <h1 class="abx-title">Astral OS</h1>
               <p class="abx-sub">
                 A browser-based desktop with apps, games, emulators, and a virtual filesystem.
               </p>
@@ -108,15 +108,6 @@ export class AboutApp extends BaseApp {
               <div class="abx-pill">
                 50k+ Total Users
               </div>
-              <a
-                class="abx-meta-link"
-                target="blank"
-                rel="noopener noreferrer"
-                href="https://discord.gg/wufbWFwr4G"
-              >
-                <i class="fab fa-discord"></i> Join Discord
-              </a>
-
               <a
                 class="abx-meta-link"
                 target="blank"
@@ -164,7 +155,7 @@ export class AboutApp extends BaseApp {
             </div>
 
             <div class="abx-panel">
-              <div class="abx-panel-h">Support YukiOS</div>
+              <div class="abx-panel-h">Support Astral OS</div>
               <div class="abx-panel-b">
                 <div class="abx-sponsor">
                   <div class="abx-sponsor-icon">
@@ -172,7 +163,7 @@ export class AboutApp extends BaseApp {
                   </div>
                   <div class="abx-sponsor-content">
                     <div class="abx-sponsor-title">Become a Sponsor</div>
-                    <div class="abx-sponsor-desc">Help keep YukiOS free and open source. Your support directly funds development.</div>
+                    <div class="abx-sponsor-desc">Help keep Astral OS free and open source. Your support directly funds development.</div>
                     <div class="abx-sponsor-buttons">
                       <a href="https://www.patreon.com/Reeyuki" target="_blank" rel="noopener noreferrer" class="abx-sponsor-btn abx-sponsor-btn-patreon"><i class="fab fa-patreon"></i> Patreon</a>
                       <span class="abx-sponsor-btn abx-sponsor-btn-monero" id="about-monero-btn" style="cursor:pointer;">

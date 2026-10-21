@@ -80,7 +80,7 @@ const YUKI_HOME_ICON =
   "https://cdn.jsdelivr.net/gh/NaoTomori1/YukiOS@main/static/icons/logo.png";
 const VIEWPORT_SANDBOX =
   "allow-scripts allow-forms allow-same-origin allow-popups allow-top-navigation-by-user-activation allow-modals";
-const FALLBACK_WISP = "wss://racialequityleadership.com/ws?reconnect=1";
+const FALLBACK_WISP = DEFAULT_WISP_URL;
 const MAX_HISTORY = 500;
 const MAX_CLOSED = 20;
 const MAX_SUGGEST = 8;
@@ -546,12 +546,7 @@ export function createTabsStore(viewportContainer, opts = {}) {
       return;
     }
   }
-  const DEFAULT_BOOKMARKS = [
-    {
-      name: "YukiOS Alpha Historical",
-      url: "https://reeyuki.github.io/YukiOS-AlphaHistorical/desktop/",
-    },
-  ];
+  const DEFAULT_BOOKMARKS = [];
   function loadBookmarks() {
     let stored = null;
     try {

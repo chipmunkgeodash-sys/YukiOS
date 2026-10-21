@@ -251,7 +251,7 @@ function flattenYukiNews(limit) {
 function buildYukiRow(entry) {
   const row = createElement("div", { className: "yukiNewsRow" });
   const source = createElement("div", { className: "tpSource" });
-  setText(source, entry.section || "YukiOS");
+  setText(source, entry.section || "Astral OS");
   row.appendChild(source);
   const article = createElement("div", { className: "tpArticle" });
   setText(article, entry.title || "Update");
@@ -379,7 +379,7 @@ function renderNewsStories(stories) {
     allNewsListNode.appendChild(buildArticle(story));
   });
   const head = createElement("div", { className: "yukiNewsHead" });
-  setText(head, "YukiOS");
+  setText(head, "Astral OS");
   allNewsListNode.appendChild(head);
   flattenYukiNews(10).forEach((entry) =>
     allNewsListNode.appendChild(buildYukiRow(entry)),

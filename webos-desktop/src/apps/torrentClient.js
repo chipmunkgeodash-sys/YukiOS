@@ -229,7 +229,7 @@ export class TorrentClientApp extends BaseApp {
     showAboutDialog({
       title: "Torrent Client",
       version: "1.0.0",
-      description: "A WebTorrent-based torrent client for YukiOS.",
+      description: "A WebTorrent-based torrent client for Astral OS.",
       icon: "fas fa-download",
       iconType: "fontawesome",
     });
@@ -618,8 +618,8 @@ export class TorrentClientApp extends BaseApp {
     }
     os.dialog
       .confirm(
-        "Save to YukiOS?",
-        "Save files to YukiOS when the download finishes?",
+        "Save to Astral OS?",
+        "Save files to Astral OS when the download finishes?",
       )
       .then((saveToYukiOS) => {
         this.startDownloadWithOptions({ magnetUri }, saveToYukiOS, null);
@@ -841,7 +841,7 @@ export class TorrentClientApp extends BaseApp {
               <input type="checkbox" id="torrent-save-yukios-toggle" checked />
               <span class="torrent-toggle-slider"></span>
             </span>
-            Save to YukiOS when done
+            Save to Astral OS when done
           </label>
         </div>
         <div class="torrent-dialog-actions">
@@ -1182,7 +1182,7 @@ export class TorrentClientApp extends BaseApp {
           <i class="fas fa-download"></i> Save to Computer
         </button>
         <button class="torrent-detail-action-btn" data-action="yukios" data-infohash="${infoHash}">
-          <i class="fas fa-hdd"></i> Save to YukiOS
+          <i class="fas fa-hdd"></i> Save to Astral OS
         </button>
       `
       : "";
@@ -1454,7 +1454,7 @@ export class TorrentClientApp extends BaseApp {
         "fas fa-check-circle",
       );
     } catch (err) {
-      console.error("Error saving to YukiOS:", err);
+      console.error("Error saving to Astral OS:", err);
       os.dialog.alert("Save Failed", `Failed to save files: ${err.message}`);
     }
   }

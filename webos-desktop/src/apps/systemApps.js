@@ -141,10 +141,10 @@ export class SystemAppsApp extends BaseApp {
     const uninstalledAll = allApps.filter((a) => a.uninstalled);
 
     this.nativeApps = sortByIcon(
-      installedAll.filter((a) => !a.targetUrl || a.id === "discordApp"),
+      installedAll.filter((a) => !a.targetUrl),
     );
     this.webApps = sortByIcon(
-      installedAll.filter((a) => a.targetUrl && a.id !== "discordApp"),
+      installedAll.filter((a) => a.targetUrl),
     );
     this.uninstalledApps = sortByIcon(uninstalledAll);
     this.query = "";
@@ -187,7 +187,7 @@ export class SystemAppsApp extends BaseApp {
           (a) =>
             !a.uninstalled &&
             a.title.toLowerCase().includes(q) &&
-            (!a.targetUrl || a.id === "discordApp"),
+            !a.targetUrl,
         )
       : this.nativeApps;
     const webFiltered = q
@@ -195,8 +195,7 @@ export class SystemAppsApp extends BaseApp {
           (a) =>
             !a.uninstalled &&
             a.title.toLowerCase().includes(q) &&
-            a.targetUrl &&
-            a.id !== "discordApp",
+            a.targetUrl,
         )
       : this.webApps;
     const uninstalledFiltered = q

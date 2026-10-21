@@ -133,7 +133,7 @@ export class EmulatorApp extends BaseApp {
 
     const win = os.window.create(
       "emulator-win",
-      "Yuki Emulator",
+      "Astral Emulator",
       "800px",
       "600px",
       {

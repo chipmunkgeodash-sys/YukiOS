@@ -138,10 +138,10 @@ export class LaunchpadApp extends BaseApp {
 
     this.allApps = allApps.sort((a, b) => a.title.localeCompare(b.title));
     this.nativeApps = sortByIcon(
-      allApps.filter((a) => !a.targetUrl || a.id === "discordApp"),
+      allApps.filter((a) => !a.targetUrl),
     );
     this.webApps = sortByIcon(
-      allApps.filter((a) => a.targetUrl && a.id !== "discordApp"),
+      allApps.filter((a) => a.targetUrl),
     );
     this.sortByIcon = sortByIcon;
     this.query = "";

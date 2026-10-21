@@ -42,7 +42,7 @@ let switcher = null;
 
 const MODES = [
   {
-    label: "YukiOS",
+    label: "Astral OS",
     icon: "fas fa-snowflake",
     mode: "reset",
     description: "Default desktop experience",

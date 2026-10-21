@@ -1345,7 +1345,7 @@ export class GameUI {
     if (isSocialDisabled()) {
       os.notify.send(
         "Social features are disabled",
-        "Enable them in Yuki Steam Settings to use Friends & Chat.",
+        "Enable them in Astral Steam Settings to use Friends & Chat.",
         {
           type: "info",
         },

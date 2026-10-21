@@ -18,7 +18,7 @@
   },
   {
     "date": "October 17, 2026",
-    "label": "YukiOS v5.2",
+    "label": "Astral OS v5.2",
     "sections": [
       {
         "icon": "fas fa-tornado",
@@ -144,7 +144,7 @@
   },
   {
     "date": "October 7, 2026",
-    "label": "YukiOS V5.0.0",
+    "label": "Astral OS V5.0.0",
     "sections": [
       {
         "icon": "fa-gamepad",
@@ -224,7 +224,7 @@
           [
             "fa-shield-halved",
             "Automatic Boot Stealth",
-            "Launch YukiOS in a clean about:blank tab automatically on boot."
+            "Launch Astral OS in a clean about:blank tab automatically on boot."
           ],
           [
             "fa-bolt",
@@ -371,7 +371,7 @@
           [
             "fa-external-link-alt",
             "Links Open as Windows",
-            "External app links open as titled YukiOS windows."
+            "External app links open as titled Astral OS windows."
           ],
           [
             "fa-clone",
@@ -646,7 +646,7 @@
   },
   {
     "date": "September 6, 2026",
-    "label": "YukiOS v4.0.0",
+    "label": "Astral OS v4.0.0",
     "sections": [
       {
         "icon": "fa-gamepad",
@@ -876,7 +876,7 @@
           [
             "fa-pen",
             "Customize Any App",
-            "Change icon and title for any Yuki app"
+            "Change icon and title for any Astral app"
           ]
         ]
       },
@@ -981,7 +981,7 @@
           [
             "fa-power-off",
             "Autostart Manager",
-            "Choose which system apps launch with YukiOS for quick management."
+            "Choose which system apps launch with Astral OS for quick management."
           ],
           [
             "fa-hdd",
@@ -1022,7 +1022,7 @@
           [
             "fa-file-code",
             "Browse OS Source",
-            "Open the System folder in Files to explore every YukiOS source code!"
+            "Open the System folder in Files to explore every Astral OS source code!"
           ]
         ]
       }
@@ -1030,7 +1030,7 @@
   },
   {
     "date": "August 18, 2026",
-    "label": "YukiOS v3.0.0",
+    "label": "Astral OS v3.0.0",
     "sections": [
       {
         "icon": "fa-users",
@@ -1050,7 +1050,7 @@
           [
             "fa-layer-group",
             "Mode Switcher App",
-            "Preview and switch between desktop modes: MacOS, SteamDeck, ChromeOS, Tiling, and YukiOS."
+            "Preview and switch between desktop modes: MacOS, SteamDeck, ChromeOS, Tiling, and Astral OS."
           ]
         ]
       },
@@ -1301,12 +1301,12 @@
       },
       {
         "icon": "fa-user-lock",
-        "title": "YukiOS Account & Cloud Sync",
+        "title": "Astral OS Account & Cloud Sync",
         "items": [
           [
             "fa-user-lock",
-            "YukiOS Account",
-            "Sign in to a YukiOS Account to carry your identity (nickname, avatar, bio) across every device."
+            "Astral OS Account",
+            "Sign in to a Astral OS Account to carry your identity (nickname, avatar, bio) across every device."
           ],
           [
             "fa-cloud-arrow-up",
@@ -1317,7 +1317,7 @@
       },
       {
         "icon": "fa-comment-dots",
-        "title": "Yuki Steam-style Friends panel",
+        "title": "Astral Steam-style Friends panel",
         "items": [
           [
             "fa-unlock",
@@ -1328,12 +1328,12 @@
       },
       {
         "icon": "fa-map-signs",
-        "title": "Live Tour for Yuki Steam",
+        "title": "Live Tour for Astral Steam",
         "items": [
           [
             "fa-map-signs",
-            "Yuki Steam Tour",
-            "Yuki Steam greets you with a quick walkthrough of the store, library, quests, and community on first open."
+            "Astral Steam Tour",
+            "Astral Steam greets you with a quick walkthrough of the store, library, quests, and community on first open."
           ]
         ]
       },
@@ -1408,12 +1408,12 @@
       },
       {
         "icon": "fa-users",
-        "title": "Yuki Steam Community Profiles",
+        "title": "Astral Steam Community Profiles",
         "items": [
           [
             "fa-users",
-            "Yuki Steam Community Profiles",
-            "Yuki Steam Community profiles now show every player's achievements, playtime, current activity, and editable bios publicly."
+            "Astral Steam Community Profiles",
+            "Astral Steam Community profiles now show every player's achievements, playtime, current activity, and editable bios publicly."
           ]
         ]
       },
@@ -1445,12 +1445,12 @@
           [
             "fa-user-gear",
             "Account Hub",
-            "Turn your local profile into a registered account on a dedicated Yuki Steam login page."
+            "Turn your local profile into a registered account on a dedicated Astral Steam login page."
           ],
           [
             "fa-user-slash",
             "Disable Social",
-            "Turn off friends, community, and activity completely from Yuki Steam Settings."
+            "Turn off friends, community, and activity completely from Astral Steam Settings."
           ]
         ]
       }
@@ -1594,12 +1594,12 @@
     "sections": [
       {
         "icon": "fa-bell",
-        "title": "Yuki Steam Notifications",
+        "title": "Astral Steam Notifications",
         "items": [
           [
             "fa-bell",
             "Now Playing Popup Toggle",
-            "Disable currently playing popups in Yuki Steam settings, or click one to open Yuki Steam Settings."
+            "Disable currently playing popups in Astral Steam settings, or click one to open Astral Steam Settings."
           ]
         ]
       }
@@ -1801,7 +1801,7 @@
       },
       {
         "icon": "fa-layer-group",
-        "title": "Tiling & Yuki Steam",
+        "title": "Tiling & Astral Steam",
         "items": [
           [
             "fa-layer-group",
@@ -1810,8 +1810,8 @@
           ],
           [
             "fa-newspaper",
-            "Yuki Steam News System",
-            "Real news and updates feed inside the Yuki Steam app so you never miss a game announcement."
+            "Astral Steam News System",
+            "Real news and updates feed inside the Astral Steam app so you never miss a game announcement."
           ]
         ]
       }
@@ -1822,7 +1822,7 @@
     "sections": [
       {
         "icon": "fa-desktop",
-        "title": "Yuki Remote Desktop",
+        "title": "Astral Remote Desktop",
         "items": [
           [
             "fa-share",
@@ -1837,7 +1837,7 @@
           [
             "fa-rocket",
             "Electron App",
-            "Download the native YukiOS desktop app for persistent storage, system tray, and remote host."
+            "Download the native Astral OS desktop app for persistent storage, system tray, and remote host."
           ]
         ]
       },
@@ -2163,7 +2163,7 @@
           [
             "fa-hdd",
             "Mount Real Folders",
-            "Mount real local directories into the YukiOS filesystem via the File System Access API with full read/write support."
+            "Mount real local directories into the Astral OS filesystem via the File System Access API with full read/write support."
           ]
         ]
       }
@@ -2179,7 +2179,7 @@
           [
             "fa-cloud-arrow-down",
             "Automatic Update Detection",
-            "YukiOS now checks for new versions automatically and shows a tray icon when an update is available."
+            "Astral OS now checks for new versions automatically and shows a tray icon when an update is available."
           ]
         ]
       },
@@ -2302,8 +2302,8 @@
         "items": [
           [
             "fa-layer-group",
-            "Yuki Steam Overlay",
-            "Press Shift+Tab in any game to open the Yuki Steam overlay with playtime, achievements, friends, notes, and a built-in browser."
+            "Astral Steam Overlay",
+            "Press Shift+Tab in any game to open the Astral Steam overlay with playtime, achievements, friends, notes, and a built-in browser."
           ]
         ]
       },
@@ -2740,7 +2740,7 @@
         "items": [
           [
             "fa-code",
-            "Yuki Dev Tools",
+            "Astral Dev Tools",
             "Run IT Tools that look nice with yukios themes."
           ]
         ]
@@ -2863,12 +2863,12 @@
           [
             "fa-mouse-pointer",
             "Tray Context Menus",
-            "Right-click tray icons for quick actions. Power modes, brightness presets,network settings, clipboard app, Yuki Steam library/store, and recent games."
+            "Right-click tray icons for quick actions. Power modes, brightness presets,network settings, clipboard app, Astral Steam library/store, and recent games."
           ],
           [
             "fa-user-friends",
             "Live Friends Stats",
-            "Track active users and trending OS apps inside your Yuki Steam Friends List."
+            "Track active users and trending OS apps inside your Astral Steam Friends List."
           ],
           ["fa-mask", "Incognito mode", "Add incognito mode in browser"]
         ]
@@ -2906,7 +2906,7 @@
         "items": [
           [
             "fa-robot",
-            "Yuki AI Assistant",
+            "Astral AI Assistant",
             "Local AI assistant that runs in your browser - launch apps, manage files, and chat without sending data anywhere."
           ],
           [
@@ -2916,7 +2916,7 @@
           ],
           [
             "fa-book-open",
-            "YukiOS Guide",
+            "Astral OS Guide",
             "A built-in guide that walks you through apps, features, and how everything fits together."
           ],
           [
@@ -3011,7 +3011,7 @@
         "items": [
           [
             "fa-cube",
-            "Yuki Blender",
+            "Astral Blender",
             "Added new blender app with enchanced 3d functionality."
           ],
           ["fa-database", "Storage Editor", "Added new Storage Editor app."],
@@ -3053,7 +3053,7 @@
           ],
           [
             "fa-video",
-            "Yuki Convert Upgrade",
+            "Astral Convert Upgrade",
             "Added video and audio format support for file conversion."
           ],
           [
@@ -3196,8 +3196,8 @@
         "items": [
           [
             "fa-star",
-            "Yuki Steam Improvement",
-            "Improved Yuki Steam UI and added settings."
+            "Astral Steam Improvement",
+            "Improved Astral Steam UI and added settings."
           ],
           ["fa-film", "Ruffle App", "Added ruffle."],
           ["fa-star", "Slime Rancher and TABS", "Added Slime Rancher and TABS."]
@@ -3214,14 +3214,14 @@
         "items": [
           [
             "fa-steam-symbol",
-            "Yuki Steam Improvement",
-            "Improved Yuki Steam UI and settings, with a data pack install option and faster loading."
+            "Astral Steam Improvement",
+            "Improved Astral Steam UI and settings, with a data pack install option and faster loading."
           ],
           ["fa-film", "Ruffle App", "Added ruffle."],
           [
             "fa-mobile-screen",
             "PWA Support",
-            "Added progressive web app support for YukiOS."
+            "Added progressive web app support for Astral OS."
           ],
           [
             "fa-sliders",
@@ -3324,8 +3324,8 @@
           ],
           [
             "fa-house",
-            "Yuki Steam Home Button",
-            "Added a add to home button in the Yuki Steam app."
+            "Astral Steam Home Button",
+            "Added a add to home button in the Astral Steam app."
           ],
           [
             "fa-ellipsis",
@@ -3345,8 +3345,8 @@
         "items": [
           [
             "fa-magnifying-glass",
-            "Yuki Steam Launch from Search",
-            "Launch Yuki Steam apps directly from the search/query experience."
+            "Astral Steam Launch from Search",
+            "Launch Astral Steam apps directly from the search/query experience."
           ],
           [
             "fa-book-open",
@@ -3402,7 +3402,7 @@
         "items": [
           [
             "fa-code",
-            "Yuki Code",
+            "Astral Code",
             "A full code editor powered by VS Code, built right into your desktop."
           ],
           [
@@ -3481,7 +3481,7 @@
           ],
           [
             "fa-video",
-            "Yuki Convert",
+            "Astral Convert",
             "Convert any file to other formats fuly locally without uploading to a server."
           ],
           [

@@ -415,16 +415,16 @@ export const descriptionMap = {
     "Quick arithmetic and everyday calculations, modeled after classic OS calculators.",
   settingsApp:
     "Tweak themes, behavior, and system preferences from one central panel.",
-  aboutApp: "Version numbers, developer credits, and the story behind YukiOS.",
+  aboutApp: "Version numbers, developer credits, and the story behind Astral OS.",
   newsApp:
     "Catch up on what's new with changelogs, features, and recent updates at a glance.",
   explorer:
     "Browse, organize, and manage your virtual files with familiar folder navigation.",
   notepad: "Jot down notes, draft ideas, or edit plain text without any fuss.",
   browserApp:
-    "Surf the web from inside your virtual desktop with the built-in Yuki Browser.",
+    "Surf the web from inside your virtual desktop with the built-in Astral Browser.",
   yukiDevTools:
-    "Yuki Dev Tools loads IT Tools in a themed iframe and keeps it synced with YukiOS CSS variables.",
+    "Astral Dev Tools loads IT Tools in a themed iframe and keeps it synced with Astral OS CSS variables.",
   terminal:
     "Fire up the command line for scripts, system commands, and developer tools.",
   music:
@@ -432,13 +432,13 @@ export const descriptionMap = {
   cameraApp:
     "Snap screenshots or record webcam footage right from your desktop.",
   steamApp:
-    "Your game library, wrapped in a Steam-style storefront interface built right into YukiOS.",
+    "Your game library, wrapped in a Steam-style storefront interface built right into Astral OS.",
   flash:
     "Classic Flash games live on through Ruffle and Flashpoint Archive, all in one hub.",
   vscode:
     "Visual Studio Code is a free, lightweight code editor by Microsoft, released in 2015. It supports virtually every programming language with extensions, debugging, and integrated Git.",
   yukiCode:
-    "A Monaco-powered code editor built into YukiOS, based on the same engine that runs Visual Studio Code.",
+    "A Monaco-powered code editor built into Astral OS, based on the same engine that runs Visual Studio Code.",
   jsDosApp:
     "JsDos is a JavaScript port of the DOSBox emulator, allowing classic DOS programs and games to run natively inside a web browser.",
   v86app:

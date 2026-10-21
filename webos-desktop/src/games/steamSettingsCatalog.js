@@ -1,14 +1,14 @@
 export const SETTINGS = {
   runOnStartup: {
     title: "Run on Startup",
-    description: "Launch Yuki Steam when your computer starts",
+    description: "Launch Astral Steam when your computer starts",
     type: "toggle",
     panel: "account",
     default: false,
   },
   startMinimized: {
     title: "Start Minimized",
-    description: "Start Yuki Steam minimized to system tray",
+    description: "Start Astral Steam minimized to system tray",
     type: "toggle",
     panel: "account",
     default: false,
@@ -121,14 +121,14 @@ export const SETTINGS = {
   },
   enableStartupAnimation: {
     title: "Enable Startup Animation",
-    description: "Show loading animation when Yuki Steam starts",
+    description: "Show loading animation when Astral Steam starts",
     type: "toggle",
     panel: "interface",
     default: true,
   },
   deckBootAnimation: {
     title: "Deck Boot Video",
-    description: "Play the fullscreen boot video when Yuki Deck starts",
+    description: "Play the fullscreen boot video when Astral Deck starts",
     type: "toggle",
     panel: "interface",
     default: true,
@@ -191,7 +191,7 @@ export const SETTINGS = {
   },
   steamAudioEnabled: {
     title: "Steam Audio",
-    description: "Play UI sound effects in Steam and Yuki Deck",
+    description: "Play UI sound effects in Steam and Astral Deck",
     type: "toggle",
     panel: "interface",
     default: true,

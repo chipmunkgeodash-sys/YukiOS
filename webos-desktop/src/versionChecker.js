@@ -46,7 +46,7 @@ class VersionChecker {
         if (lastKnownRemote !== remoteVersion) {
           os.notify.send(
             "Update Available",
-            `YukiOS ${remoteVersion} is now available!`,
+            `Astral OS ${remoteVersion} is now available!`,
             {
               type: "info",
               duration: 0,

@@ -438,7 +438,7 @@ function renderContextMenuChooser() {
         </div>
         <div class="cm-style-chooser" id="cmstyle-appearance" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;width:100%;">
           <button class="cm-style-option ${isYukios ? "active" : ""}" data-cm-style="${CM_STYLES.YUKIOS}" style="display:flex;flex-direction:column;align-items:center;padding:10px;border:1.5px solid ${isYukios ? "var(--brand)" : "var(--glass-border)"};border-radius:8px;background:${isYukios ? "color-mix(in srgb, var(--brand) 12%, transparent)" : "var(--glass)"};cursor:pointer;gap:6px;">
-            <span class="cm-style-label" style="font-weight:600;font-size:13px;"><i class="fas fa-desktop" style="margin-right:6px;"></i>YukiOS CM Style</span>
+            <span class="cm-style-label" style="font-weight:600;font-size:13px;"><i class="fas fa-desktop" style="margin-right:6px;"></i>Astral OS CM Style</span>
             ${mock(CM_STYLES.YUKIOS)}
             <span class="cm-style-desc" style="font-size:11px;color:var(--text-secondary)">Rounded glass menu</span>
           </button>
@@ -807,7 +807,7 @@ export function renderCloakSettings() {
         <div class="settings-row">
           <div class="settings-label-group">
             <span class="settings-label-title">Open in about:blank</span>
-            <span class="settings-label-desc">Reopen YukiOS in a blank tab behind a decoy page</span>
+            <span class="settings-label-desc">Reopen Astral OS in a blank tab behind a decoy page</span>
           </div>
           <button class="settings-btn" id="settingsAboutBlankNow"><i class="fas fa-external-link-alt"></i> Open now</button>
         </div>
@@ -868,7 +868,7 @@ export function renderCloakSettings() {
         <div class="settings-row">
           <div class="settings-label-group">
             <span class="settings-label-title">Panic key</span>
-            <span class="settings-label-desc">Press to instantly leave YukiOS</span>
+            <span class="settings-label-desc">Press to instantly leave Astral OS</span>
           </div>
           <button class="settings-btn" id="settingsPanicKey"><i class="fas fa-keyboard"></i> <span>${(() => {
             try {
@@ -1875,7 +1875,7 @@ export function renderAutostartSettings() {
       <div class="settings-category-header">Autostart</div>
       <div class="settings-card">
         <div class="settings-card-header"><i class="fas fa-power-off"></i> Launch on Startup</div>
-        <p class="autostart-intro">Choose which system apps open automatically when YukiOS starts.</p>
+        <p class="autostart-intro">Choose which system apps open automatically when Astral OS starts.</p>
         <div class="autostart-toolbar">
           <div class="autostart-search-wrap">
             <i class="fas fa-magnifying-glass"></i>
@@ -1911,11 +1911,11 @@ export function renderDataSettings() {
       </div>
 
       <div class="settings-card" style="margin-top: 16px;">
-        <div class="settings-card-header"><i class="fas fa-download"></i> Save YukiOS</div>
+        <div class="settings-card-header"><i class="fas fa-download"></i> Save Astral OS</div>
         <div class="settings-row">
           <div class="settings-label-group">
             <span class="settings-label-title">Download Page</span>
-            <span class="settings-label-desc">Save a local copy of YukiOS</span>
+            <span class="settings-label-desc">Save a local copy of Astral OS</span>
           </div>
           <button class="settings-btn" id="settingsDownloadPageBtn"><i class="fas fa-download"></i> Download</button>
         </div>
@@ -2232,14 +2232,14 @@ export function renderCreditsSettings() {
         <img class="settings-credits-avatar" src="${resolveIconUrl("static/icons/reeyuki.webp")}" alt="Reeyuki" loading="lazy" onerror="this.style.display='none'" />
         <div class="settings-credits-author-info">
           <span class="settings-credits-author-name"><i class="fas fa-heart"></i> Made by Reeyuki</span>
-          <span class="settings-credits-author-sub">Creator of YukiOS</span>
+          <span class="settings-credits-author-sub">Creator of Astral OS</span>
         </div>
         <div class="settings-credits-author-links">
           <a class="settings-credits-author-link" href="https://github.com/reeyuki" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub</a>
           <a class="settings-credits-author-link" href="https://reeyuki.neocities.org" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i> Website</a>
         </div>
       </div>
-      <div class="settings-credits-license">YukiOS is MIT Licensed</div>
+      <div class="settings-credits-license">Astral OS is MIT Licensed</div>
       <div class="settings-card-header"><i class="fas fa-plug"></i> External Services</div>
       <div class="settings-services-grid">${externalItems}</div>
       <div class="settings-card-header"><i class="fas fa-box-open"></i> Libraries Used</div>
@@ -2259,7 +2259,7 @@ export function renderAboutSettings() {
           <div style="display: flex; align-items: center; gap: 16px;">
             <img src="${resolveIconUrl("static/icons/logo.png")}" style="width: 48px; height: 48px; object-fit: contain;" onerror="this.src='favicon.ico'"/>
             <div>
-              <h2 style="margin:0;font-size:1.3em;font-weight:600;display:flex;align-items:center;gap:8px;color:var(--text-primary);">YukiOS <span style="font-size:0.65em;background:var(--brand-dim);color:var(--brand);padding:2px 8px;border-radius:4px;font-weight:500;">${YUKIOS_VERSION}</span></h2>
+              <h2 style="margin:0;font-size:1.3em;font-weight:600;display:flex;align-items:center;gap:8px;color:var(--text-primary);">Astral OS <span style="font-size:0.65em;background:var(--brand-dim);color:var(--brand);padding:2px 8px;border-radius:4px;font-weight:500;">${YUKIOS_VERSION}</span></h2>
               <p style="margin:4px 0 0 0;color:var(--text-secondary);font-size:0.8em;">Desktop, in your browser</p>
             </div>
           </div>
@@ -2269,22 +2269,6 @@ export function renderAboutSettings() {
           <div style="display:flex;align-items:center;gap:8px;">
             <span style="color:var(--text-muted);font-size:0.78em;font-weight:500;">Build</span>
             <a href="https://github.com/Reeyuki/yukios/commit/${__GIT_COMMIT__}" target="_blank" rel="noopener noreferrer" style="font-family:monospace;font-size:0.78em;color:var(--text-secondary);text-decoration:none;background:var(--glass);padding:2px 8px;border-radius:4px;border:1px solid var(--glass-border);transition:color 0.15s,background 0.15s,border-color 0.15s;" onmouseover="this.style.color='var(--brand-hover)';this.style.background='var(--brand-dim)';this.style.borderColor='var(--brand)'" onmouseout="this.style.color='var(--text-secondary)';this.style.background='var(--glass)';this.style.borderColor='var(--glass-border)'">${__GIT_COMMIT__}</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="settings-card" style="margin-top: 16px;">
-        <div class="settings-card-header"><i class="fab fa-discord"></i> Community</div>
-        <div class="settings-row">
-          <div class="settings-label-group">
-            <span class="settings-label-title">YukiCord</span>
-            <span class="settings-label-desc">Join our Discord server</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0;">
-            <input readonly value="https://discord.gg/2Z8Gvtqt7" class="settings-input" style="width:210px;padding:7px 10px;font-family:monospace;font-size:13px;user-select:all;cursor:text;" onclick="this.select()" title="Click to select invite" />
-            <a href="https://discord.gg/2Z8Gvtqt7" target="_blank" rel="noopener noreferrer" class="settings-discord-link">
-              <button class="settings-btn settings-btn-discord"><i class="fab fa-discord"></i> Join</button>
-            </a>
           </div>
         </div>
       </div>

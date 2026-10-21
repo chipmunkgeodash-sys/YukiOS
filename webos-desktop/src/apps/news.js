@@ -100,7 +100,7 @@ export class NewsApp extends BaseApp {
       <div class="news-update">
         <div class="news-update-head">
           ${update.date ? `<div class="news-date">${update.date}</div>` : ""}
-          <div class="news-label">${update.label || "YukiOS Update"}</div>
+          <div class="news-label">${update.label || "Astral OS Update"}</div>
         </div>
         ${renderSections(update.sections)}
       </div>
@@ -118,7 +118,7 @@ export class NewsApp extends BaseApp {
               </div>
               <div class="news-hero-title">
                 <h1>What's New</h1>
-                <p>The latest updates and fixes for YukiOS</p>
+                <p>The latest updates and fixes for Astral OS</p>
               </div>
             </div>
             <div class="news-hero-meta">

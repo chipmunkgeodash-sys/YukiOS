@@ -446,7 +446,7 @@ export async function openSteamSettingsWindow(wm) {
     return;
   }
 
-  const win = os.window.create(winId, "Yuki Steam Settings", 900, 600, {
+  const win = os.window.create(winId, "Astral Steam Settings", 900, 600, {
     skipHeader: true,
     icon: "fas fa-snowflake",
     resizable: true,
