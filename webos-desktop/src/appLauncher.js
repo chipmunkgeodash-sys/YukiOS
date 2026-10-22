@@ -56,6 +56,7 @@ import {
   fetchDirectAsBlobUrl,
 } from "./proxies.js";
 import { trigger as triggerCursorEffect } from "./cursorEffect.js";
+import { sitePath } from "./shared/siteBase.js";
 const STATICALLY_BASE = resolveGhUrl(
   "https://cdn.jsdelivr.net/gh/NaoTomori1/yukios-games@main",
 );
@@ -373,7 +374,7 @@ export class AppLauncher {
 
         if (info?.scramjetEnabled) {
           const wispUrl = getWispUrl();
-          source = `/sapps/set-template.html?wisp=${encodeURIComponent(wispUrl)}&target=${encodeURIComponent(info.url)}`;
+          source = `${sitePath("sapps/set-template.html")}?wisp=${encodeURIComponent(wispUrl)}&target=${encodeURIComponent(info.url)}`;
         } else if (
           info?.blobEnabled &&
           typeof source === "string" &&

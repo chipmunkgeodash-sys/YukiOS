@@ -3,6 +3,7 @@ import "../styles/maps.css";
 import { BaseApp, os } from "../framework.js";
 import { getWispUrl } from "../shared/wispConfig.js";
 import { $, $$, bindEvent } from "../shared/domUtils.js";
+import { siteUrl } from "../shared/siteBase.js";
 
 const SOURCE_OPTIONS = [
   { value: "osm", label: "OpenStreetMap" },
@@ -308,8 +309,8 @@ export class MapsApp extends BaseApp {
   buildGoogleUrl(state) {
     const wispUrl = getWispUrl();
     return (
-      window.location.origin +
-      "/sapps/set-template.html?wisp=" +
+      siteUrl("sapps/set-template.html") +
+      "?wisp=" +
       encodeURIComponent(wispUrl) +
       "&target=" +
       encodeURIComponent("https://www.google.com/maps")

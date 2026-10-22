@@ -20,6 +20,7 @@ import {
   toggleClass,
   setStyle,
 } from "./shared/domUtils.js";
+import { siteUrl } from "./shared/siteBase.js";
 
 const OVERLAY_SETTINGS_KEY = StorageKeys.overlaySettings;
 const OVERLAY_NOTES_KEY = StorageKeys.overlayNotes;
@@ -1278,7 +1279,7 @@ export class GameOverlayController {
       "sandbox",
       "allow-scripts allow-same-origin allow-forms allow-popups allow-top-navigation-by-user-activation",
     );
-    iframe.src = window.location.origin + "/s/index.html";
+    iframe.src = siteUrl("s/index.html");
 
     wrapper.appendChild(iframe);
     pane.innerHTML = "";

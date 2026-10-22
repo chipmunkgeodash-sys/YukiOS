@@ -11,6 +11,7 @@ import {
   isFileProtocol,
 } from "../shared/fileProtocolFallback.js";
 import { mountFileProtocolView } from "../shared/fileProtocolEngine.js";
+import { sitePath } from "../shared/siteBase.js";
 export class ScramjetBaseApp extends BaseApp {
   popupMessageHandler = null;
 
@@ -118,7 +119,7 @@ export class ScramjetBaseApp extends BaseApp {
   }
 
   getHTMLPath() {
-    return `/sapps/set-template.html`;
+    return sitePath("sapps/set-template.html");
   }
 
   async initScramjet(payload, vt, element, state) {

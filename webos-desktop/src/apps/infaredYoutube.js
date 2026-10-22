@@ -2,6 +2,7 @@ import "../styles/infaredYoutube.css";
 import { BaseApp, os } from "../framework.js";
 import { $, bindEvent, setText } from "../shared/domUtils.js";
 import { getWispUrl } from "../shared/wispConfig.js";
+import { siteUrl } from "../shared/siteBase.js";
 
 const SOURCE = "https://youtube-liard-ten.vercel.app/";
 
@@ -19,8 +20,8 @@ export class InfaredYoutubeApp extends BaseApp {
   getScramjetUrl() {
     const wispUrl = getWispUrl();
     return (
-      window.location.origin +
-      "/sapps/set-template.html?wisp=" +
+      siteUrl("sapps/set-template.html") +
+      "?wisp=" +
       encodeURIComponent(wispUrl) +
       "&target=" +
       encodeURIComponent(SOURCE)

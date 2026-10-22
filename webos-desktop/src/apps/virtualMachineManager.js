@@ -1,6 +1,7 @@
 import "../styles/virtualMachineManager.css";
 import { BaseApp, os, StorageKeys, $ } from "../framework.js";
 import { getWispUrl } from "../shared/wispConfig.js";
+import { siteUrl } from "../shared/siteBase.js";
 const IFRAME_ATTRS =
   'style="width:100%;height:100%;border:none;" allow="autoplay; fullscreen; clipboard-write; encrypted-media; picture-in-picture" sandbox="allow-forms allow-downloads allow-modals allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"';
 
@@ -311,8 +312,8 @@ export class VirtualMachineManagerApp extends BaseApp {
   scramjetUrl(url) {
     const wispUrl = getWispUrl();
     return (
-      window.location.origin +
-      "/s/index.html?wisp=" +
+      siteUrl("s/index.html") +
+      "?wisp=" +
       encodeURIComponent(wispUrl) +
       "&embed=1" +
       "#" +

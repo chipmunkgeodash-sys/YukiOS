@@ -24,6 +24,7 @@ import {
 import { AppSource } from "../AppSource.js";
 import { PREDEFINED_AVATARS } from "../utils/avatarData.js";
 import { buildWindowHeader } from "../shared/windowHeader.js";
+import { sitePath } from "../shared/siteBase.js";
 const AC = {
   WIN_ID: "app-creator-win",
   FS_FOLDER: ["Apps"],
@@ -903,7 +904,7 @@ export class AppCreatorApp extends BaseApp {
 
     if (scramjetEnabled) {
       const wispUrl = getWispUrl();
-      finalUrl = `/sapps/set-template.html?wisp=${encodeURIComponent(wispUrl)}&target=${encodeURIComponent(secureUrl)}`;
+      finalUrl = `${sitePath("sapps/set-template.html")}?wisp=${encodeURIComponent(wispUrl)}&target=${encodeURIComponent(secureUrl)}`;
     } else if (
       blobEnabled &&
       typeof secureUrl === "string" &&

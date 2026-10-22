@@ -1,4 +1,5 @@
 import { resolveUrl } from "../shared/assetResolver.js";
+import { sitePath } from "../shared/siteBase.js";
 
 export const DEFAULT_SNOWFLAKE_URL = "wss://snowflake.torproject.net/";
 
@@ -66,7 +67,7 @@ export class TorManager {
     if (!TorManager.mod) {
       this.log("Loading WebTor WASM module...");
       this.bootstrapPhase = "loading-wasm";
-      const wasmUrl = await resolveUrl("/wasm/webtor/webtor_wasm.js");
+      const wasmUrl = await resolveUrl(sitePath("wasm/webtor/webtor_wasm.js"));
       TorManager.mod = await import(/* @vite-ignore */ wasmUrl);
     }
     const mod = TorManager.mod;
@@ -101,7 +102,7 @@ export class TorManager {
       ).toString();
       if (url.includes("igor53627.github.io/webtor-rs")) {
         const filename = url.split("/").pop();
-        const localUrl = await resolveUrl("/wasm/webtor/" + filename);
+        const localUrl = await resolveUrl(sitePath("wasm/webtor/" + filename));
         return originalFetch(localUrl, init);
       }
       return originalFetch(input, init);

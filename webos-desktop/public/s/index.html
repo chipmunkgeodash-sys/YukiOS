@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Browser</title>
-  <link rel="icon" href="/s/dogfavi.png" type="image/png" />
+  <link rel="icon" href="dogfavi.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -13,13 +13,13 @@
     rel="stylesheet" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print"
     onload="this.media='all'" />
-  <link rel="preload" as="fetch" crossorigin href="/s/set.wasm" />
+  <link rel="preload" as="fetch" crossorigin href="set.wasm" />
   <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/@mercuryworkshop/epoxy-transport@3.0.1/dist/index.mjs" />
   <link rel="modulepreload"
     href="https://cdn.jsdelivr.net/npm/@mercuryworkshop/libcurl-transport@2.0.5/dist/index.mjs" />
-  <script src="/s/set.js" defer></script>
-  <script src="/s/adblock.js" defer></script>
-  <script src="/s/controller.api.js" defer></script>
+  <script src="set.js" defer></script>
+  <script src="adblock.js" defer></script>
+  <script src="controller.api.js" defer></script>
   <script type="module">
     import { default as EpoxyTransport } from "https://cdn.jsdelivr.net/npm/@mercuryworkshop/epoxy-transport@3.0.1/dist/index.mjs";
     import { default as LibcurlTransport } from "https://cdn.jsdelivr.net/npm/@mercuryworkshop/libcurl-transport@2.0.5/dist/index.mjs";
@@ -4572,9 +4572,9 @@
             scramjet = new Controller({
               config: {
                 prefix: basePath + "scramjet/",
-                wasmPath: "/s/set.wasm",
-                scramjetPath: "/s/set.js",
-                injectPath: "/s/controller.inject.js"
+                wasmPath: new URL("set.wasm", location.href).pathname,
+                scramjetPath: new URL("set.js", location.href).pathname,
+                injectPath: new URL("controller.inject.js", location.href).pathname
               },
               transport,
               serviceworker: sw
@@ -4917,7 +4917,7 @@
             if (isEmbedded) {
               sendToParent({ type: "browser-new-window", incognito: false });
             } else {
-              window.open(window.location.origin + "/s/index.html", "_blank");
+              window.open(new URL("index.html", location.href).href, "_blank");
             }
           } else if (action === "new-private-window") {
             if (isEmbedded) {

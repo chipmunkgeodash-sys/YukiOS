@@ -1,5 +1,6 @@
 import { os, StorageKeys } from "../framework.js";
 import { getWispUrl } from "../shared/wispConfig.js";
+import { siteUrl } from "../shared/siteBase.js";
 
 let popupCounter = 0;
 const popupMinIntervalMs = 1500;
@@ -221,8 +222,8 @@ export function createPopupWindow(options) {
       appId: parentAppId,
     });
     const src =
-      location.origin +
-      "/sapps/set-template.html?wisp=" +
+      siteUrl("sapps/set-template.html") +
+      "?wisp=" +
       encodeURIComponent(getWispUrl()) +
       "&target=" +
       encodeURIComponent(url) +
