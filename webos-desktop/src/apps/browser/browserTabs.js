@@ -28,10 +28,10 @@ import {
 } from "./plugins/windowOpenInNewTab.js";
 const DEFAULT_TAB_URL = "yuki://home";
 const HOME_URL = "yuki://home";
-const SEARCH_BASE = "https://search.brave.com/search?q=";
+const SEARCH_BASE = "https://html.duckduckgo.com/html/?q=";
 const SEARCH_ENGINES = {
   brave: { name: "Brave", url: "https://search.brave.com/search?q=" },
-  duckduckgo: { name: "DuckDuckGo", url: "https://duckduckgo.com/?q=" },
+  duckduckgo: { name: "DuckDuckGo", url: "https://html.duckduckgo.com/html/?q=" },
   google: { name: "Google", url: "https://www.google.com/search?q=" },
   bing: { name: "Bing", url: "https://www.bing.com/search?q=" },
   startpage: {
@@ -374,11 +374,11 @@ export function createTabsStore(viewportContainer, opts = {}) {
     return combined;
   }
   function getSearchBase() {
-    const storedKey = safeGet(StorageKeys.browserSearchEngine, "brave");
+    const storedKey = safeGet(StorageKeys.browserSearchEngine, "duckduckgo");
     const region = safeGet(StorageKeys.browserSearchRegion, "");
     const customList = getCustomEngines();
     let base = SEARCH_BASE;
-    let activeKey = "brave";
+    let activeKey = "duckduckgo";
     if (typeof storedKey === "string" && storedKey.startsWith("custom_")) {
       const parsed = parseInt(storedKey.slice(7), 10);
       if (
@@ -389,15 +389,15 @@ export function createTabsStore(viewportContainer, opts = {}) {
         base = customList[parsed].url;
         activeKey = storedKey;
       } else {
-        base = SEARCH_ENGINES.brave.url;
-        activeKey = "brave";
+        base = SEARCH_ENGINES.duckduckgo.url;
+        activeKey = "duckduckgo";
       }
     } else if (typeof storedKey === "string" && SEARCH_ENGINES[storedKey]) {
       base = SEARCH_ENGINES[storedKey].url;
       activeKey = storedKey;
     } else {
-      base = SEARCH_ENGINES.brave.url;
-      activeKey = "brave";
+      base = SEARCH_ENGINES.duckduckgo.url;
+      activeKey = "duckduckgo";
     }
     if (region) {
       if (activeKey === "google")
@@ -633,6 +633,8 @@ export function createTabsStore(viewportContainer, opts = {}) {
       minHeight: "0",
       border: "none",
       display: "none",
+      colorScheme: "light",
+      background: "Canvas",
     });
     return frame;
   }
@@ -725,6 +727,14 @@ export function createTabsStore(viewportContainer, opts = {}) {
           wispUrl: currentWispUrl(),
         });
         if (result && result.title) tab.title = result.title;
+        if (result && result.searchFallback) {
+          os.notify.send(
+            "Browser",
+            "This search engine blocked the proxy, so the results come from " +
+              result.searchFallback + ".",
+            { type: "info", duration: 4000 },
+          );
+        }
         applyZoomToViewport(tab);
         const switchedWisp =
           result && typeof result.usedWispUrl === "string"
@@ -1789,7 +1799,7 @@ export function createTabsStore(viewportContainer, opts = {}) {
     const pillGroup = createElement("div", {
       className: "settings-option-group",
     });
-    const currentEngineKey = safeGet(StorageKeys.browserSearchEngine, "brave");
+    const currentEngineKey = safeGet(StorageKeys.browserSearchEngine, "duckduckgo");
     const allEngines = getAllEngines();
     Object.keys(allEngines).forEach((key) => {
       const eng = allEngines[key];

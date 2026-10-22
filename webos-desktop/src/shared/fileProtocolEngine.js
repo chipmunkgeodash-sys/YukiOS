@@ -5,10 +5,11 @@ import { readOsTheme, parseLocalTarget, getMimeType } from "./virtualFsNet.js";
 import { fetchViaWisp, fetchViaWispRaw } from "./libcurlWispClient.js";
 import { fetchPage, fetchRaw } from "./transportRouter.js";
 import { escapeDinoGameAttr } from "./dino/dinoGame.js";
+import { isEngineChallenge, fallbackSearch } from "./searchFallback.js";
 
 export { fetchViaWisp, fetchViaWispRaw };
 
-const braveSearchBase = "https://search.brave.com/search?q=";
+const defaultSearchBase = "https://html.duckduckgo.com/html/?q=";
 const urlSchemePattern = /^[a-zA-Z][a-zA-Z0-9+.-]*:/;
 const httpPattern = /^https?:\/\//i;
 const hostPattern = /^[^\s@]+\.[^\s@]+(\/.*)?$/;
@@ -39,7 +40,7 @@ function normalizeEngineUrl(input) {
     return trimmed;
   }
   if (trimmed.includes(" ") || hostPattern.test(trimmed) === false) {
-    return braveSearchBase + encodeURIComponent(trimmed);
+    return defaultSearchBase + encodeURIComponent(trimmed);
   }
   return "https://" + trimmed;
 }
@@ -497,12 +498,21 @@ export async function renderFileProtocolUrl(viewportIframe, url, opts = {}) {
   const wispUrl = opts.wispUrl || getWispUrl();
   viewportIframe.srcdoc = buildLoadingHtml(normalized);
   try {
-    const result = await fetchPage(normalized, {
+    let result = await fetchPage(normalized, {
       wispUrl,
       method: opts.method,
       headers: opts.headers,
       range: opts.range,
     });
+    let searchFallback = null;
+    if (isEngineChallenge(normalized, result.text)) {
+      searchFallback = fallbackSearch(normalized);
+      if (searchFallback) {
+        result = await fetchPage(searchFallback.url, {
+          wispUrl: result.usedWispUrl || wispUrl,
+        });
+      }
+    }
     recordHistory(normalized, result.title);
     const mime = result.contentType || getMimeType(normalized);
     const usedWispUrl = result.usedWispUrl || wispUrl || "";
@@ -521,7 +531,8 @@ export async function renderFileProtocolUrl(viewportIframe, url, opts = {}) {
         fallbackUsed,
       };
     }
-    const finalHtml = buildDocumentHtml(normalized, result.text || "", mime);
+    const documentBase = searchFallback ? searchFallback.url : normalized;
+    const finalHtml = buildDocumentHtml(documentBase, result.text || "", mime);
     viewportIframe.src = "about:blank";
     viewportIframe.srcdoc = finalHtml;
     return {
@@ -532,6 +543,7 @@ export async function renderFileProtocolUrl(viewportIframe, url, opts = {}) {
       contentType: mime,
       usedWispUrl,
       fallbackUsed,
+      searchFallback: searchFallback ? searchFallback.name : "",
     };
   } catch (err) {
     const message = err && err.message ? err.message : String(err);
@@ -541,7 +553,7 @@ export async function renderFileProtocolUrl(viewportIframe, url, opts = {}) {
 }
 
 export async function mountFileProtocolView(container, opts = {}) {
-  const targetUrl = opts.targetUrl || "https://search.brave.com/";
+  const targetUrl = opts.targetUrl || "https://duckduckgo.com/";
   const appId = opts.appId || "file-protocol";
   const showChrome = opts.showChrome !== false;
   container.replaceChildren();

@@ -405,8 +405,8 @@ export function buildYukiHomeSrcdoc() {
       <i class="fa-solid fa-magnifying-glass"></i>
       <input type="text" id="searchInput" placeholder="Search the web..." autocomplete="off" />
       <select id="engine">
+        <option value="https://html.duckduckgo.com/html/?q=">DuckDuckGo</option>
         <option value="https://search.brave.com/search?q=">Brave</option>
-        <option value="https://duckduckgo.com/?q=">DuckDuckGo</option>
         <option value="https://www.google.com/search?q=">Google</option>
       </select>
     </form>
