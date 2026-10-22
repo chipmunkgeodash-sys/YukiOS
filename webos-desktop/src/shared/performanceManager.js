@@ -1,4 +1,9 @@
 import { StorageKeys, os, createElement } from "../framework.js";
+
+const LOW_MEMORY_GB = 4;
+const LOW_CORE_COUNT = 2;
+const AUTO_NOTIFY_DELAY_MS = 6000;
+
 class PerformanceManager {
   constructor() {
     let mode = null;
@@ -162,6 +167,29 @@ class PerformanceManager {
     } catch {}
     return false;
   }
+  downgradeToPerformance(message, notifyDelayMs = 0) {
+    this.currentMode = "performance";
+    try {
+      os.storage.set(StorageKeys.performanceMode, "performance");
+      os.storage.set(StorageKeys.performanceAutoApplied, true);
+    } catch {}
+    try {
+      document.documentElement.setAttribute("data-performance", "performance");
+      this.applyPerformanceMode("performance");
+    } catch {}
+    setTimeout(() => {
+      try {
+        os.notify.send("Performance mode enabled", message, {
+          type: "info",
+          duration: 6000,
+          icon: "fa-bolt",
+        });
+      } catch {}
+    }, notifyDelayMs);
+  }
+  isLowMemoryDevice(result) {
+    return result.memory <= LOW_MEMORY_GB || result.cores <= LOW_CORE_COUNT;
+  }
   watchJankThenDowngrade(reason) {
     try {
       const deltas = [];
@@ -179,29 +207,9 @@ class PerformanceManager {
         if (total < 10 || (ratio < 0.2 && avg <= 34)) {
           return;
         }
-        this.currentMode = "performance";
-        try {
-          os.storage.set(StorageKeys.performanceMode, "performance");
-          os.storage.set(StorageKeys.performanceAutoApplied, true);
-        } catch {}
-        try {
-          document.documentElement.setAttribute(
-            "data-performance",
-            "performance",
-          );
-          this.applyPerformanceMode("performance");
-        } catch {}
-        try {
-          os.notify.send(
-            "Performance mode enabled",
-            "Slow frame rate detected, reduced effects for smoother speed. Change anytime in Settings.",
-            {
-              type: "info",
-              duration: 6000,
-              icon: "fa-bolt",
-            },
-          );
-        } catch {}
+        this.downgradeToPerformance(
+          "Slow frame rate detected, reduced effects for smoother speed. Change anytime in Settings.",
+        );
       };
       const tick = (now) => {
         if (!last) last = now;
@@ -239,6 +247,13 @@ class PerformanceManager {
         `cros=${result.cros.is} score=${result.score}/6 [${result.votes.join(", ") || "no weak signals"}] ` +
         `(cores=${result.cores}, mem=${result.memory}, gl=${result.glRenderer}, bench=${result.benchMs}ms)`;
       this.chromebookReason = reason;
+      if (this.isLowMemoryDevice(result)) {
+        this.downgradeToPerformance(
+          "This device has little memory, so effects were reduced to keep apps and the browser stable. Change anytime in Settings.",
+          AUTO_NOTIFY_DELAY_MS,
+        );
+        return;
+      }
       if (result.score < 2) return;
       this.watchJankThenDowngrade(reason);
     } catch {}

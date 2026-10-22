@@ -3473,3 +3473,10 @@
   align-items: center;
   padding: 12px 0 4px;
 }
+
+html[data-performance="performance"] .browser-native-root *,
+html[data-performance="performance"] .browser-native-root *::before,
+html[data-performance="performance"] .browser-native-root *::after {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
