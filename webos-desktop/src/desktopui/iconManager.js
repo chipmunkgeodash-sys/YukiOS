@@ -52,6 +52,7 @@ const HARDCODED_DESKTOP_ICONS = [
     icon: "static/icons/shittify.webp",
   },
   { app: "steamApp", name: "Astral Steam", icon: "papirus:apps/steam" },
+  { app: "appStoreApp", name: "App Store", icon: "fas fa-store" },
   {
     app: "geometryTodayApp",
     name: "Cloud Gaming (Geometry Today)",

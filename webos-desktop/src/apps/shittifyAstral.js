@@ -128,6 +128,21 @@ export function astralFeatures(win) {
     }
     list.forEach(function (song) {
       var card = win.makeCard(song, function () { playFrom(song, list); });
+      // Into one of the member's own playlists, using the page's own dialog and
+      // storage, so it plays from there like any other song. No sign-in needed:
+      // playlists live in this browser.
+      var plus = doc.createElement("button");
+      plus.textContent = "+";
+      plus.title = "Add to a playlist";
+      plus.setAttribute("aria-label", "Add to a playlist");
+      plus.style.cssText =
+        "position:absolute;top:8px;left:8px;width:26px;height:26px;border:0;border-radius:50%;background:rgba(0,0,0,.75);color:#fff;cursor:pointer;font-size:16px;line-height:1";
+      card.style.position = "relative";
+      plus.addEventListener("click", function (e) {
+        e.stopPropagation();
+        addToPlaylist(song);
+      });
+      card.appendChild(plus);
       if (kind === "shared" && signedIn() && song.by && song.by === identity.uid) {
         var x = doc.createElement("button");
         x.textContent = "✕";
@@ -197,6 +212,11 @@ export function astralFeatures(win) {
 
   // ---- playing ---------------------------------------------------------------
 
+  function addToPlaylist(song) {
+    if (typeof win.showAddToPlaylistModal === "function") win.showAddToPlaylistModal(song);
+    else toast("Playlists aren't available here.");
+  }
+
   function playFrom(song, list) {
     try { allSongsRN = list; } catch (e) { /* the page's queue is not reachable here */ }
     win.playAnySong(song);
@@ -238,10 +258,11 @@ export function astralFeatures(win) {
 
   // ---- adding songs ----------------------------------------------------------
 
+  // Anyone can search and add a song to a playlist (those live in this browser);
+  // sharing it with everyone needs an Astral account.
   function openAddDialog() {
-    if (!signedIn()) { toast("Sign in to Astral to add songs."); return; }
     win.showModal(
-      '<h2>Add a song to Astral Shared</h2>' +
+      '<h2>Find a song to share or save</h2>' +
       '<input class="modal-input" id="astral-q" placeholder="Search songs or artists" maxlength="100" />' +
       '<div id="astral-results" style="max-height:300px;overflow:auto;margin-top:10px"></div>' +
       '<div class="modal-actions"><button class="modal-cancel" id="astral-close">Close</button>' +
@@ -282,10 +303,18 @@ export function astralFeatures(win) {
                 text.appendChild(t);
                 text.appendChild(a);
                 row.appendChild(text);
+                var listBtn = doc.createElement("button");
+                listBtn.className = "modal-cancel";
+                listBtn.textContent = "Playlist";
+                listBtn.title = "Add to one of your playlists";
+                listBtn.addEventListener("click", function () { addToPlaylist(toPageSong(s)); });
+                row.appendChild(listBtn);
                 var add = doc.createElement("button");
                 add.className = "modal-confirm";
-                add.textContent = "Add";
+                add.textContent = "Share";
+                add.title = "Add to Astral Shared so everyone can listen";
                 add.addEventListener("click", function () {
+                  if (!signedIn()) { toast("Sign in to Astral to share songs. You can still add it to a playlist."); return; }
                   add.disabled = true;
                   request("music.addShared", { song: s })
                     .then(function () { add.textContent = "Added ✓"; toast("Added to Astral Shared. Everyone can see it now."); load("shared"); })

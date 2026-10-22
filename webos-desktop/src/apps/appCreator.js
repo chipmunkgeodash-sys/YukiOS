@@ -615,7 +615,7 @@ export class AppCreatorApp extends BaseApp {
       for (const [fileName] of Object.entries(desktopFolder)) {
         if (!fileName.endsWith(".desktop")) continue;
         try {
-          const raw = await this.fs.readTextFile(["Desktop"], fileName);
+          const raw = await os.fs.read(["Desktop", fileName]);
           if (!raw) continue;
           const data = JSON.parse(raw);
           if (data.isCustomApp && data.app?.startsWith(AC.APP_ID_PREFIX)) {
@@ -646,7 +646,7 @@ export class AppCreatorApp extends BaseApp {
       for (const [fileName] of Object.entries(desktopFolder)) {
         if (!fileName.endsWith(".desktop")) continue;
         try {
-          const raw = await this.fs.readTextFile(["Desktop"], fileName);
+          const raw = await os.fs.read(["Desktop", fileName]);
           if (!raw) continue;
           const data = JSON.parse(raw);
           if (data.isCustomApp && data.app === appId)
@@ -947,7 +947,9 @@ export class AppCreatorApp extends BaseApp {
     os.window.addToTaskbar(winId, `${name} - Preview`, AC.TASKBAR_ICON);
   }
 
-  async installApp(
+  // Installs an app and puts it on the desktop, with no window of its own to
+  // report to (the App Store uses this). Returns the new app's id.
+  async installCore(
     name,
     url,
     iconUrl,
@@ -955,8 +957,6 @@ export class AppCreatorApp extends BaseApp {
     proxyIndex,
     scramjetEnabled,
     blobEnabled,
-    statusEl,
-    win,
   ) {
     const secureUrl = ensureHttpsProtocol(url);
     const appId = `${AC.APP_ID_PREFIX}${name.toLowerCase().replace(/\s+/g, "-")}-${Date.now()}`;
@@ -1013,13 +1013,52 @@ export class AppCreatorApp extends BaseApp {
     if (scramjetEnabled) {
       this.registerCustomScramjetApp(appId, name, secureUrl, iconUrl);
     }
+    return appId;
+  }
 
+  async installApp(
+    name,
+    url,
+    iconUrl,
+    proxyEnabled,
+    proxyIndex,
+    scramjetEnabled,
+    blobEnabled,
+    statusEl,
+    win,
+  ) {
+    await this.installCore(
+      name,
+      url,
+      iconUrl,
+      proxyEnabled,
+      proxyIndex,
+      scramjetEnabled,
+      blobEnabled,
+    );
     this.showStatus(statusEl, "success", `"${name}" installed!`);
     os.notify.send("Added to desktop", `"${name}"`, {
       type: "success",
       duration: 3000,
     });
     this.refreshInstalledList(win);
+  }
+
+  // Removes an installed app without asking (the App Store has asked already).
+  async removeCore(appId) {
+    const meta = await this.loadAppMeta(appId);
+    if (!meta) return false;
+    try {
+      await os.fs.delete(["Desktop"], meta.fileName);
+    } catch (e) {
+      console.warn("AppCreator: fs delete failed", e);
+    }
+    os.app.unregisterCustomApp(appId);
+    const desktopIcon = $(
+      `.desktop-file-icon[data-file-name="${CSS.escape(meta.fileName)}"]`,
+    );
+    if (desktopIcon) desktopIcon.remove();
+    return true;
   }
 
   async addToDesktop(appId, name, iconUrl, faviconUrl) {

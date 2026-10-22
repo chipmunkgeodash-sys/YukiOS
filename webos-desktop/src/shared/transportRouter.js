@@ -1,3 +1,4 @@
+import { probeWisp } from "./wispHealth.js";
 import { os, StorageKeys } from "../framework.js";
 import { getWispUrl, isEpoxyOnlyWisp } from "./wispConfig.js";
 import {
@@ -216,36 +217,7 @@ export function resetTransports() {
   }
 }
 
+// Whether a server is actually carrying traffic, not just accepting connections.
 export function checkWispHealth(url, timeoutMs = 8000) {
-  return new Promise((resolve) => {
-    const started = Date.now();
-    let socket = null;
-    try {
-      socket = new WebSocket(url);
-    } catch (err) {
-      resolve({
-        ok: false,
-        error: err && err.message ? err.message : String(err),
-      });
-      return;
-    }
-    const finish = (result) => {
-      clearTimeout(timer);
-      try {
-        socket.close();
-      } catch (closeErr) {
-        void closeErr;
-      }
-      resolve(result);
-    };
-    const timer = setTimeout(() => {
-      finish({ ok: false, error: "connection timed out" });
-    }, timeoutMs);
-    socket.onopen = () => {
-      finish({ ok: true, ms: Date.now() - started });
-    };
-    socket.onerror = () => {
-      finish({ ok: false, error: "connection failed" });
-    };
-  });
+  return probeWisp(url, { timeoutMs });
 }

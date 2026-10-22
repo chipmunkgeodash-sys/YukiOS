@@ -7,6 +7,7 @@ import { NewsApp } from "./apps/news.js";
 import { CalculatorApp } from "./apps/calculator.js";
 import { TaskManagerApp } from "./apps/taskManager.js";
 import { WeatherApp } from "./apps/weather.js";
+import { AppStoreApp } from "./apps/appStore.js";
 import { MarkdownApp } from "./apps/markdown.js";
 import { ShittifyApp } from "./apps/shittify.js";
 import { MonacoApp } from "./apps/monaco.js";
@@ -61,6 +62,7 @@ const APP_CLASS_MAP = {
   calculatorApp: CalculatorApp,
   taskManagerApp: TaskManagerApp,
   weatherApp: WeatherApp,
+  appStoreApp: AppStoreApp,
   markdownApp: MarkdownApp,
   shittifyApp: ShittifyApp,
   monacoApp: MonacoApp,

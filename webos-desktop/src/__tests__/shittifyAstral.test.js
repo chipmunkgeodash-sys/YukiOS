@@ -22,6 +22,7 @@ function installPage() {
     return card;
   });
   window.playAnySong = vi.fn();
+  window.showAddToPlaylistModal = vi.fn();
   window.showModal = vi.fn((html, onMount) => {
     const o = document.createElement("div");
     o.className = "modal-overlay";
@@ -108,13 +109,13 @@ describe("Evil Spotify Astral additions", () => {
   it("only shows Remove on songs you added", async () => {
     await signIn();
     const cards = [...document.querySelectorAll("#cards-astral-shared .card")];
-    expect(cards[0].querySelector("button")).not.toBeNull();
-    expect(cards[1].querySelector("button")).toBeNull();
+    expect(cards[0].querySelector("button[title='Remove from Astral Shared']")).not.toBeNull();
+    expect(cards[1].querySelector("button[title='Remove from Astral Shared']")).toBeNull();
   });
 
   it("removes your own song and refreshes the row", async () => {
     await signIn();
-    document.querySelector("#cards-astral-shared .card button").click();
+    document.querySelector("#cards-astral-shared .card button[title='Remove from Astral Shared']").click();
     await flush();
     await flush();
     expect(requests.some((r) => r.op === "music.removeShared" && r.payload.song.id === "s1")).toBe(true);
@@ -198,11 +199,65 @@ describe("Evil Spotify Astral additions", () => {
     expect(document.getElementById("astral-toast").textContent).toContain("Everyone can see it now");
   });
 
-  it("asks a guest to sign in instead of opening the add dialog", async () => {
+  it("adds a song to a playlist with the + on its card, through the page's own dialog", async () => {
+    await signIn();
+    document.querySelector("#cards-astral-shared .card button[title='Add to a playlist']").click();
+    expect(window.showAddToPlaylistModal).toHaveBeenCalledTimes(1);
+    const song = window.showAddToPlaylistModal.mock.calls[0][0];
+    expect(song.id).toBe("astral-s1");
+    // It carries what is needed to play it later, from the saved playlist.
+    expect(song.__astral).toBe(true);
+    expect(song.astral.id).toBe("s1");
+    // Pressing + does not also start playing the song.
+    expect(original).not.toHaveBeenCalled();
+  });
+
+  it("lets a guest put songs in a playlist: those live in the browser", async () => {
+    replies["music.featured"] = [{ id: "f1", title: "Pinned", artist: "Owner" }];
+    await signIn({ signedIn: false });
+    const plus = document.querySelector("#cards-astral-featured .card button[title='Add to a playlist']");
+    expect(plus).not.toBeNull();
+    plus.click();
+    expect(window.showAddToPlaylistModal).toHaveBeenCalledTimes(1);
+  });
+
+  it("a song saved to a playlist plays again from the saved copy", async () => {
+    await signIn();
+    document.querySelector("#cards-astral-shared .card button[title='Add to a playlist']").click();
+    // What the page keeps in localStorage and later hands back to playAnySong.
+    const saved = JSON.parse(JSON.stringify(window.showAddToPlaylistModal.mock.calls[0][0]));
+    await window.playAnySong(saved);
+    expect(requests.some((r) => r.op === "music.resolve" && r.payload.song.id === "s1")).toBe(true);
+    expect(original).toHaveBeenCalledTimes(1);
+    expect(original.mock.calls[0][0].uploadedBlob).toBe("https://audio.example/s1.mp3");
+  });
+
+  it("the find-a-song dialog can save a result to a playlist without sharing it", async () => {
+    await signIn();
+    document.querySelector("#astral-add-song").click();
+    document.querySelector("#astral-q").value = "band";
+    document.querySelector("#astral-go").click();
+    await flush();
+    await flush();
+    const playlistBtn = [...document.querySelectorAll("#astral-results button")].find((b) => b.textContent === "Playlist");
+    playlistBtn.click();
+    expect(window.showAddToPlaylistModal.mock.calls.at(-1)[0].id).toBe("astral-dz9");
+    expect(requests.some((r) => r.op === "music.addShared")).toBe(false);
+  });
+
+  it("a guest can search, but sharing asks them to sign in", async () => {
     await signIn({ signedIn: false });
     document.querySelector("#astral-add-song").click();
-    expect(window.showModal).not.toHaveBeenCalled();
-    expect(document.getElementById("astral-toast").textContent).toContain("Sign in to Astral");
+    expect(window.showModal).toHaveBeenCalled();
+    document.querySelector("#astral-q").value = "band";
+    document.querySelector("#astral-go").click();
+    await flush();
+    await flush();
+    const share = [...document.querySelectorAll("#astral-results button")].find((b) => b.textContent === "Share");
+    share.click();
+    await flush();
+    expect(document.getElementById("astral-toast").textContent).toContain("Sign in to Astral to share");
+    expect(requests.some((r) => r.op === "music.addShared")).toBe(false);
   });
 
   it("puts the rows back when the page rebuilds its home view", async () => {

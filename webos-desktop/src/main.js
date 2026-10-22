@@ -21,6 +21,8 @@ import { setDesktopUI, handleSteamUrlParam } from "./games/games.js";
 import { registerPWA } from "./pwa/pwa.js";
 import { SessionManager } from "./SessionManager.js";
 import { initAstralBridge } from "./shared/astralBridge.js";
+import { startWispRanking } from "./shared/wispHealth.js";
+import { WISP_SERVERS } from "./shared/wispConfig.js";
 import { CommandPalette } from "./commandPalette.js";
 import { ClipboardManager } from "./systemClipboardManager.js";
 import { initializeMirrors } from "./shared/assetResolver.js";
@@ -148,6 +150,7 @@ setDesktopUI(desktopUI);
 const sessionManager = new SessionManager(os);
 os.app.register("sessionManager", sessionManager);
 initAstralBridge();
+startWispRanking(WISP_SERVERS.map((s) => s.url));
 const commandPalette = new CommandPalette(os);
 os.app.register("commandPalette", commandPalette);
 

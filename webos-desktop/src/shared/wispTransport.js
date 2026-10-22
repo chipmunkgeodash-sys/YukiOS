@@ -1,4 +1,5 @@
-import { getWispUrl, WISP_SERVERS, DEFAULT_WISP_URL } from "./wispConfig.js";
+import { whenHealthy } from "./wispHealth.js";
+import { getWispUrl, getWispCandidates, WISP_SERVERS, DEFAULT_WISP_URL } from "./wispConfig.js";
 
 let transportPromise = null;
 
@@ -52,6 +53,7 @@ async function loadEpoxyTransport() {
 
 async function establishTransport() {
   const TransportClass = await loadEpoxyTransport();
+  await whenHealthy();
   const candidates = [];
   const initial = [getWispUrl(), DEFAULT_WISP_URL];
   for (const url of initial) {
@@ -66,7 +68,9 @@ async function establishTransport() {
       candidates.push(clean);
     }
   }
-  for (const wispUrl of candidates) {
+  // Working servers first: a dead one costs the full probe time before the next.
+  const ordered = getWispCandidates(candidates[0]).filter((u) => candidates.indexOf(u) !== -1);
+  for (const wispUrl of ordered.length ? ordered : candidates) {
     try {
       const rawTransport = new TransportClass({ wisp: wispUrl });
       await rawTransport.init();

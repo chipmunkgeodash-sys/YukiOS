@@ -112,6 +112,22 @@ export const APP_MANIFESTS = [
       "View and manage running applications, processes, and system resources with ability to close apps.",
   },
   {
+    serviceKey: "appStoreApp",
+    enhanced: false,
+    type: "system",
+    title: "Astral App Store",
+    icon: "fas fa-store",
+    launchType: "instance",
+    windowIdPatterns: ["app-store"],
+    category: "internet",
+    clippy: {
+      message: "Looking for something new? The App Store has hundreds of sites ready to install.",
+      animation: ClippyAnimation.Show,
+    },
+    description:
+      "Browse and install web apps to your desktop, and add repos for more.",
+  },
+  {
     serviceKey: "weatherApp",
     enhanced: false,
     type: "system",

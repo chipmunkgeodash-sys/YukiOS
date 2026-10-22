@@ -1,14 +1,19 @@
 import { os, StorageKeys } from "../framework.js";
+import { currentRanking, orderByHealth } from "./wispHealth.js";
 
 export const DEFAULT_WISP_URL = "wss://wisp.mercurywork.shop/";
 
 export const WISP_SERVERS = [
+  // Checked with real proxied traffic (a request out and the answer back), not
+  // just a handshake. Mercury is the one most proxy sites point at.
   { name: "Mercury Wisp", url: DEFAULT_WISP_URL },
+  { name: "Anura Wisp", url: "wss://anura.pro/" },
+  { name: "Terbium Wisp", url: "wss://wisp.terbiumon.top/wisp/" },
+  { name: "Space Wisp", url: "wss://gointospace.app/wisp/" },
   {
     name: "Reeyuki Wisp",
     url: "wss://hurt-agata-liventcord-api-7072e9a6.koyeb.app/",
   },
-  { name: "Anura Wisp", url: "wss://anura.pro/" },
   { name: "Legacy Wisp (Epoxy only)", url: "wss://racialequityleadership.com/ws?reconnect=1" },
 ];
 
@@ -36,7 +41,21 @@ export function getWispUrl() {
     stored = DEFAULT_WISP_URL;
     os.storage.set(StorageKeys.wispServer, stored);
   }
-  return stored;
+  return healthyOrSame(stored);
+}
+
+const isBuiltinWisp = (url) => WISP_SERVERS.some((s) => s.url === url);
+
+// A built-in server that is not carrying traffic right now (see wispHealth.js)
+// gives way to the fastest one that is. A server the member chose themselves is
+// never swapped, and nothing is saved: the choice stays what it was.
+function healthyOrSame(url) {
+  const ranking = currentRanking();
+  if (!ranking || !isBuiltinWisp(url)) return url;
+  const mine = ranking.find((r) => r.url === url);
+  if (!mine || mine.ok) return url;
+  const best = ranking.find((r) => r.ok);
+  return best ? best.url : url;
 }
 
 export function sanitizeWispUrlCandidate(url) {
@@ -96,7 +115,11 @@ export function getWispCandidates(preferredUrl) {
     if (candidates.length === 0) {
       return [DEFAULT_WISP_URL];
     }
-    return candidates;
+    // Servers the member added keep their place; the built-in ones go by what
+    // is carrying traffic right now, fastest first.
+    const custom = candidates.filter((c) => !isBuiltinWisp(c));
+    const builtin = orderByHealth(candidates.filter((c) => isBuiltinWisp(c)));
+    return [...custom, ...builtin];
   } catch {
     return [DEFAULT_WISP_URL];
   }

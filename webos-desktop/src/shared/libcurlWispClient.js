@@ -1,4 +1,5 @@
 import { getWispUrl, getWispCandidates } from "./wispConfig.js";
+import { whenHealthy } from "./wispHealth.js";
 import { createElement } from "./domUtils.js";
 import { StorageKeys } from "../StorageKeys.js";
 
@@ -380,6 +381,8 @@ export async function fetchViaWisp(url, options = {}) {
   if (!/^https?:\/\//i.test(target)) {
     throw new Error("fetchViaWisp handles web addresses only: " + target);
   }
+  // A first request waits briefly for the first server known to be working.
+  await whenHealthy();
   const candidates = resolveWispCandidates(options.wispUrl);
   let lastError = null;
   for (let index = 0; index < candidates.length; index++) {
@@ -457,6 +460,7 @@ export async function fetchViaWispRaw(url, options = {}) {
   if (!/^https?:\/\//i.test(target)) {
     throw new Error("fetchViaWispRaw handles web addresses only: " + target);
   }
+  await whenHealthy();
   const candidates = resolveWispCandidates(options.wispUrl);
   let lastError = null;
   for (let index = 0; index < candidates.length; index++) {
