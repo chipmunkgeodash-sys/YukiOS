@@ -15,6 +15,7 @@ APP_MANIFESTS.forEach((manifest) => {
       trayOptions: manifest.trayOptions || null,
       musicUrl: manifest.musicUrl || null,
       startMaximized: manifest.startMaximized || false,
+      directLoad: manifest.directLoad || false,
     });
   }
 });

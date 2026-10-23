@@ -1087,6 +1087,7 @@ export const APP_MANIFESTS = [
     description:
       "Stream the latest anime episodes and watch seasonal shows on Aniwatch.",
     targetUrl: "https://aniwatch.co.at",
+    directLoad: true,
     windowSize: ["90vw", "85vh"],
   },
   {

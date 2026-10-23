@@ -16,6 +16,7 @@ export function createScramjetWebApp(config) {
     trayOptions = null,
     musicUrl = null,
     startMaximized = false,
+    directLoad = false,
   } = config;
 
   class ScramjetWebApp extends ScramjetBaseApp {
@@ -48,6 +49,10 @@ export function createScramjetWebApp(config) {
 
     getWindowSize() {
       return windowSize;
+    }
+
+    isDirectLoad() {
+      return directLoad;
     }
 
     startAppMusic() {

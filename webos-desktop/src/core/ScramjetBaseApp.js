@@ -12,6 +12,12 @@ import {
 } from "../shared/fileProtocolFallback.js";
 import { mountFileProtocolView } from "../shared/fileProtocolEngine.js";
 import { sitePath } from "../shared/siteBase.js";
+
+const DIRECT_LOAD_PERMISSIONS =
+  "fullscreen; autoplay; encrypted-media; picture-in-picture; clipboard-write";
+const DIRECT_LOAD_SANDBOX =
+  "allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-presentation allow-top-navigation-by-user-activation";
+
 export class ScramjetBaseApp extends BaseApp {
   popupMessageHandler = null;
 
@@ -68,6 +74,10 @@ export class ScramjetBaseApp extends BaseApp {
 
   getWISPURL() {
     return getWispUrl();
+  }
+
+  isDirectLoad() {
+    return false;
   }
 
   getSandbox() {
@@ -156,6 +166,13 @@ export class ScramjetBaseApp extends BaseApp {
       );
     }
     this.iframe = element.querySelector(`#${this.getAppId()}-iframe`);
+    if (this.isDirectLoad()) {
+      this.iframe.setAttribute("allow", DIRECT_LOAD_PERMISSIONS);
+      this.iframe.setAttribute("allowfullscreen", "");
+      this.iframe.setAttribute("sandbox", DIRECT_LOAD_SANDBOX);
+      this.iframe.src = this.getTargetURL();
+      return;
+    }
     const wispUrl = this.getWISPURL();
     const targetUrl = this.getTargetURL();
     this.iframe.src =
