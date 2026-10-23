@@ -13,3 +13,35 @@ export const SITE_BASE = BASE.startsWith("/") ? BASE : "/";
 
 export const sitePath = (path) => SITE_BASE + String(path).replace(/^\/+/, "");
 export const siteUrl = (path) => window.location.origin + sitePath(path);
+
+export const IS_EMBED = import.meta.env?.VITE_EMBED === "true";
+
+const BUNDLED_STATIC_APPS = [
+  "azahar",
+  "kiwiirc",
+  "jsdos",
+  "v86",
+  "btop",
+  "cmatrix",
+  "lavat",
+  "winxp",
+];
+
+export function bundledStaticPath(path) {
+  if (!IS_EMBED || typeof path !== "string") return null;
+  const clean = path.replace(/^\/+/, "");
+  const parts = clean.split("/");
+  if (parts[0] !== "static" || parts[1] !== "apps") return null;
+  return BUNDLED_STATIC_APPS.includes(parts[2]) ? sitePath(clean) : null;
+}
+
+export function isBundledStaticUrl(url) {
+  if (!IS_EMBED || typeof url !== "string") return false;
+  try {
+    return new URL(url, window.location.href).pathname.startsWith(
+      sitePath("static/apps/"),
+    );
+  } catch {
+    return false;
+  }
+}

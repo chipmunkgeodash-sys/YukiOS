@@ -56,7 +56,11 @@ import {
   fetchDirectAsBlobUrl,
 } from "./proxies.js";
 import { trigger as triggerCursorEffect } from "./cursorEffect.js";
-import { sitePath } from "./shared/siteBase.js";
+import {
+  sitePath,
+  isBundledStaticUrl,
+  bundledStaticPath,
+} from "./shared/siteBase.js";
 const STATICALLY_BASE = resolveGhUrl(
   "https://cdn.jsdelivr.net/gh/NaoTomori1/yukios-games@main",
 );
@@ -624,15 +628,25 @@ player.load("${swfPath}");
           return false;
         }
       })();
-      let resolvedSource = source;
-      if (!shouldBypassResolution && !isCdnGh && !isLocalhostUrl) {
+      const bundledPath = bundledStaticPath(source);
+      let resolvedSource = bundledPath
+        ? new URL(bundledPath, window.location.href).href
+        : source;
+      if (
+        !bundledPath &&
+        !shouldBypassResolution &&
+        !isCdnGh &&
+        !isLocalhostUrl
+      ) {
         resolvedSource = await resolveUrl(
           source,
           isCdnGhUrl(window.location.href),
         );
       }
 
+      const isBundledSource = isBundledStaticUrl(resolvedSource);
       if (
+        !isBundledSource &&
         typeof resolvedSource === "string" &&
         resolvedSource.includes("static/apps/azahar")
       ) {
@@ -653,6 +667,7 @@ player.load("${swfPath}");
           } catch (e) {}
         }
       } else if (
+        !isBundledSource &&
         typeof resolvedSource === "string" &&
         resolvedSource.includes("static/apps/kiwiirc")
       ) {

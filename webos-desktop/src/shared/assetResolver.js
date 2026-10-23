@@ -1,4 +1,5 @@
 import { os } from "../os/index.js";
+import { bundledStaticPath } from "./siteBase.js";
 import { $, $$ } from "./domUtils.js";
 import { StorageKeys } from "../StorageKeys.js";
 import {
@@ -452,6 +453,9 @@ export function resolveYukiAsset(path) {
 
   const cleanPath = path.startsWith("/") ? path.substring(1) : path;
 
+  const bundled = bundledStaticPath(cleanPath);
+  if (bundled) return bundled;
+
   if (isLocalDevHost()) return `${LOCAL_DEV_STATIC_BASE}/${cleanPath}`;
 
   const mirror =
@@ -538,7 +542,10 @@ export function resolveIconUrl(url) {
   const isCdn = isCdnHostname(hostname);
   const normalizedUrl = url.startsWith("/") ? url : `/${url}`;
 
-  if (normalizedUrl === "/static/apps/azahar/index.html") {
+  if (
+    normalizedUrl === "/static/apps/azahar/index.html" &&
+    !bundledStaticPath(normalizedUrl)
+  ) {
     return normalizedUrl;
   }
 
@@ -596,6 +603,8 @@ export async function resolveUrl(url, isCdnGh = false) {
     getCdnProviderByHostname(hostname) || CDN_PROVIDERS.jsdelivr;
 
   if (url.startsWith("/")) {
+    const bundled = bundledStaticPath(url);
+    if (bundled) return new URL(bundled, window.location.href).href;
     const repoBase = currentRepoBase;
     if (repoBase) return `${repoBase}${url}`;
     if (isCdnGh) return `${currentProvider.GAMES}${url}`;
