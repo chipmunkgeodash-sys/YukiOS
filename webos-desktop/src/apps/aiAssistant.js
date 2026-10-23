@@ -73,13 +73,13 @@ export class AIAssistantApp extends BaseApp {
       progressText: "",
       currentModelId: null,
       pendingMessageId: null,
-      backendType: "local",
-      remoteEndpoint: "",
+      backendType: AICore.isWeakDevice() ? "pollinations" : "local",
+      remoteEndpoint: AICore.isWeakDevice() ? AICore.POLLINATIONS_ENDPOINT : "",
       remoteApiKey: "",
-      remoteModel: "",
+      remoteModel: AICore.isWeakDevice() ? AICore.POLLINATIONS_MODEL : "",
       autoAppendV1: true,
       savedBackends: [],
-      remoteModels: [],
+      remoteModels: AICore.isWeakDevice() ? [AICore.POLLINATIONS_MODEL] : [],
     };
 
     win.innerHTML = this.buildSetupUI(state);
@@ -116,12 +116,12 @@ export class AIAssistantApp extends BaseApp {
                 <button type="button" class="ai-backend-card ${state.backendType === "local" ? "active" : ""}" data-backend="local">
                   <span class="ai-backend-icon"><i class="fas fa-microchip"></i></span>
                   <span class="ai-backend-title">Local (WebGPU)</span>
-                  <small>Runs in your browser with WebGPU</small>
+                  <small>Runs in your browser with WebGPU. Needs a strong device.</small>
                 </button>
                 <button type="button" class="ai-backend-card ${state.backendType === "craxgpt" ? "active" : ""}" data-backend="craxgpt">
                   <span class="ai-backend-icon"><i class="fas fa-robot"></i></span>
                   <span class="ai-backend-title">CraxGPT</span>
-                  <small>Cloud backend at gpt.crax.lol</small>
+                  <small>Needs an access key from gpt.crax.lol</small>
                 </button>
                 <button type="button" class="ai-backend-card ${state.backendType === "pollinations" ? "active" : ""}" data-backend="pollinations">
                   <span class="ai-backend-icon"><i class="fas fa-cloud"></i></span>
@@ -502,6 +502,13 @@ export class AIAssistantApp extends BaseApp {
             progressText: "",
           });
         }
+        return;
+      }
+
+      if (!AICore.canRunLocalModel()) {
+        initStatus.textContent =
+          "This device cannot run the local model because it has no WebGPU. Pick Pollinations instead.";
+        initStatus.className = "ai-init-status error";
         return;
       }
 

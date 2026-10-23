@@ -14,7 +14,7 @@ export const CATEGORIES = ["AI", "Social", "Video & Music", "Games", "Tools", "P
 
 export const CATALOG = [
   // AI
-  { name: "ChatGPT", url: "https://chatgpt.com", category: "AI", description: "OpenAI's assistant." },
+  { name: "CraxGPT", url: "https://gpt.crax.lol", category: "AI", description: "Chat with free AI models." },
   { name: "Claude", url: "https://claude.ai", category: "AI", description: "Anthropic's assistant." },
   { name: "Gemini", url: "https://gemini.google.com", category: "AI", description: "Google's assistant." },
   { name: "Perplexity", url: "https://www.perplexity.ai", category: "AI", description: "Search that answers with sources." },

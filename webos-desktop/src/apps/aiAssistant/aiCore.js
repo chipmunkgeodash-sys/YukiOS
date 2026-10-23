@@ -3,6 +3,9 @@ import { fetchThroughWisp } from "../../shared/wispTransport.js";
 export class AICore {
   static REMOTE_DEFAULT_ENDPOINT = "https://gpt.crax.lol";
   static REMOTE_DEFAULT_MODEL = "gpt-5-6-sol";
+  static POLLINATIONS_ENDPOINT = "https://text.pollinations.ai/openai";
+  static POLLINATIONS_MODEL = "openai";
+  static DEFAULT_CHAT_PATH = "/chat/completions";
 
   constructor() {
     this.engine = null;
@@ -20,12 +23,13 @@ export class AICore {
     this.remoteModel = null;
     this.autoAppendV1 = true;
     this.forceProxy = false;
+    this.chatPath = AICore.DEFAULT_CHAT_PATH;
   }
 
   static MODEL_PROFILES = {
     low: [
-      "Llama-3.2-1B-Instruct-q4f32_1-MLC",
       "Qwen2.5-0.5B-Instruct-q4f32_1-MLC",
+      "Llama-3.2-1B-Instruct-q4f32_1-MLC",
     ],
     fast: [
       "Llama-3.2-1B-Instruct-q4f32_1-MLC",
@@ -69,8 +73,9 @@ export class AICore {
   }
 
   resolveModelCandidates(modelType) {
+    const profileKey = AICore.isWeakDevice() ? "low" : modelType;
     const preferredModels =
-      AICore.MODEL_PROFILES[modelType] || AICore.MODEL_PROFILES.fast;
+      AICore.MODEL_PROFILES[profileKey] || AICore.MODEL_PROFILES.fast;
     const availableModelIds = this.getAvailableModelIds();
 
     if (availableModelIds.length === 0) {
@@ -280,6 +285,37 @@ export class AICore {
     this.remoteModel = config.model || AICore.REMOTE_DEFAULT_MODEL;
     this.autoAppendV1 = config.autoAppendV1 !== false;
     this.forceProxy = Boolean(config.forceProxy);
+    this.chatPath =
+      typeof config.chatPath === "string"
+        ? config.chatPath
+        : AICore.DEFAULT_CHAT_PATH;
+  }
+
+  static canRunLocalModel() {
+    return typeof navigator !== "undefined" && Boolean(navigator.gpu);
+  }
+
+  static isWeakDevice() {
+    if (typeof navigator === "undefined") return false;
+    const memory = navigator.deviceMemory || 8;
+    const cores = navigator.hardwareConcurrency || 8;
+    return !navigator.gpu || memory <= 4 || cores <= 2;
+  }
+
+  remoteChatUrl(config) {
+    const base = config?.endpoint || this.remoteEndpoint;
+    const chatPath =
+      typeof config?.chatPath === "string" ? config.chatPath : this.chatPath;
+    if (chatPath === "") {
+      return String(base || "")
+        .trim()
+        .replace(/\/+$/, "");
+    }
+    const endpoint = this.buildEndpointUrl(
+      base,
+      config?.autoAppendV1 ?? this.autoAppendV1,
+    );
+    return endpoint ? `${endpoint}${chatPath}` : "";
   }
 
   buildEndpointUrl(base, autoAppendV1) {
@@ -325,12 +361,9 @@ export class AICore {
   }
 
   async generateRemote(prompt, systemPrompt, chatHistory = [], config) {
-    const endpoint = this.buildEndpointUrl(
-      config?.endpoint || this.remoteEndpoint,
-      config?.autoAppendV1 ?? this.autoAppendV1,
-    );
+    const chatUrl = this.remoteChatUrl(config);
     const model = config?.model || this.remoteModel;
-    if (!endpoint || !model)
+    if (!chatUrl || !model)
       throw new Error("Remote endpoint or model is not configured");
     const messages = [
       { role: "system", content: systemPrompt },
@@ -342,7 +375,7 @@ export class AICore {
       headers.Authorization = `Bearer ${this.remoteApiKey}`;
     }
     try {
-      const res = await this.fetchWithProxy(`${endpoint}/chat/completions`, {
+      const res = await this.fetchWithProxy(chatUrl, {
         method: "POST",
         headers,
         body: JSON.stringify({

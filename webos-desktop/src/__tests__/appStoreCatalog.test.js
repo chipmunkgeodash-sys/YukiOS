@@ -108,12 +108,12 @@ describe("filterApps", () => {
     expect(r.every((a) => a.category === "AI")).toBe(true);
   });
   it("searches name, category and description, ignoring case", () => {
-    expect(filterApps(CATALOG, { term: "CHATGPT" }).map((a) => a.name)).toContain("ChatGPT");
+    expect(filterApps(CATALOG, { term: "CRAXGPT" }).map((a) => a.name)).toContain("CraxGPT");
     expect(filterApps(CATALOG, { term: "encyclopedia" }).map((a) => a.name)).toContain("Wikipedia");
   });
   it("shows only what is installed in the Installed view", () => {
-    const installed = new Set([siteKey("https://chatgpt.com")]);
-    expect(filterApps(CATALOG, { category: "__installed", installed }).map((a) => a.name)).toEqual(["ChatGPT"]);
+    const installed = new Set([siteKey("https://gpt.crax.lol")]);
+    expect(filterApps(CATALOG, { category: "__installed", installed }).map((a) => a.name)).toEqual(["CraxGPT"]);
   });
   it("shows everything with no filter", () => {
     expect(filterApps(CATALOG, {})).toHaveLength(CATALOG.length);
